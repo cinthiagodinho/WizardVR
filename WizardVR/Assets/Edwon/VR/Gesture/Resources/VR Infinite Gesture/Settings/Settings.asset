@@ -3,7 +3,7 @@
 --- !u!114 &11400000
 MonoBehaviour:
   m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
+  m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 0}
   m_Enabled: 1
@@ -15,7 +15,7 @@ MonoBehaviour:
   vrType: 1
   showVRUI: 1
   gestureButton: 5
-  confidenceThreshold: 0.9440535306930542
+  confidenceThreshold: 0.8190000057220459
   gestureSyncDelay: 500
   minimumGestureAxisLength: 0.1
   beginInDetectMode: 0
@@ -25,14 +25,38 @@ MonoBehaviour:
   neuralNets:
   - Neural Net 1
   gestureBank:
-  - name: Gesture 1
+  - name: Fire
     hand: 1
     isSynchronous: 0
-    exampleCount: 1
+    exampleCount: 78
+  - name: Air
+    hand: 1
+    isSynchronous: 0
+    exampleCount: 31
+  - name: Earth
+    hand: 1
+    isSynchronous: 0
+    exampleCount: 40
+  - name: Ice
+    hand: 1
+    isSynchronous: 0
+    exampleCount: 30
   gestureBankPreEdit:
-  - name: Gesture 1
+  - name: Fire
     hand: 1
     isSynchronous: 0
-    exampleCount: 0
+    exampleCount: 78
+  - name: Air
+    hand: 1
+    isSynchronous: 0
+    exampleCount: 31
+  - name: Earth
+    hand: 1
+    isSynchronous: 0
+    exampleCount: 40
+  - name: Ice
+    hand: 1
+    isSynchronous: 0
+    exampleCount: 30
   state: 0
   stateInitial: 0
