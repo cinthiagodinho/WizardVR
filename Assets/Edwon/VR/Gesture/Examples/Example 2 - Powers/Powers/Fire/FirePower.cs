@@ -10,21 +10,20 @@ public class FirePower : MonoBehaviour
 
     public GameObject fireExplosion;
 
-	void Start ()
+    void Start()
     {
         rb = GetComponent<Rigidbody>();
         Vector3 force = new Vector3(0, 0, speed);
         rb.AddRelativeForce(force, ForceMode.Impulse);
-	}
-	
-	void FixedUpdate ()
+    }
+
+    void FixedUpdate()
     {
 
-	}
+    }
 
-    void OnCollisionEnter (Collision collision)
+    void OnCollisionEnter(Collision collision)
     {
-
         if (!deathBegan)
             StartCoroutine(DestroySelf(collision));
     }
