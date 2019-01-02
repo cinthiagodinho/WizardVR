@@ -24,7 +24,6 @@ MonoBehaviour:
   lastNeuralNet: Neural Net 2
   neuralNets:
   - Neural Net 1
-  - Neural Net 2
   gestureBank:
   - name: Fire
     hand: 1
