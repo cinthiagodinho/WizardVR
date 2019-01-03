@@ -7,12 +7,22 @@ public class Player : MonoBehaviour
 
     public Text lifeText;
     private int lifePoints = 100;
-
+    private Rigidbody rb;
+    private float speed = 2.0f;
     void Start()
     {
         lifeText.text = lifePoints.ToString();
+        rb = GetComponent<Rigidbody>();
     }
 
+    //For tests without VR
+    void FixedUpdate()
+    {
+       float h = speed * Input.GetAxis("Horizontal");
+       float v = -speed * Input.GetAxis("Vertical");
+        transform.Rotate(v, h, 0);
+
+    }
     void OnCollisionEnter(Collision collision)
     {
         if (collision.gameObject.GetComponent<FirePower>())

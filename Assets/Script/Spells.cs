@@ -91,11 +91,17 @@ public class Spells : MonoBehaviour
 
     void DoShield()
     {
-        shieldlaunched = true;
-        Quaternion rotation = Quaternion.LookRotation(playerHandR.forward, Vector3.up);
-        Vector3 betweenHandsPos = (playerHandL.position + playerHandR.position) / 2;
-        Vector3 shieldPos = new Vector3(betweenHandsPos.x, betweenHandsPos.y, (betweenHandsPos.z + 1));
-        GameObject shieldInstance = GameObject.Instantiate(shield, shieldPos, rotation);
+        shieldlaunched = true;       
+
+        // FOR VR //
+        //Quaternion rotation = Quaternion.LookRotation(playerHandR.forward, Vector3.up);
+        //Vector3 betweenHandsPos = (playerHandL.position + playerHandR.position) / 2;
+        //Vector3 shieldPos = new Vector3(betweenHandsPos.x, betweenHandsPos.y, (betweenHandsPos.z + 1));   
+        //GameObject shieldInstance = GameObject.Instantiate(shield, Vector3.zero, rotation, this.gameObject.transform);
+       
+        GameObject shieldInstance = GameObject.Instantiate(shield, gameObject.transform);
+        shieldInstance.transform.localPosition = new Vector3(0, 0, 1);
+        shieldInstance.transform.parent = null;
         StartCoroutine(IEDoShield(shieldInstance));
         StartCoroutine(ShieldCooldown());
     }
@@ -108,17 +114,14 @@ public class Spells : MonoBehaviour
 
     IEnumerator ShieldCooldown()
     {
-        textShieldCooldown.text = shieldCooldown.ToString();
-
         while (shieldCooldown > -1)
         {
-            yield return new WaitForSeconds(1f);
-            shieldCooldown--;
             textShieldCooldown.text = shieldCooldown.ToString();
-        }       
+            shieldCooldown--;
+            yield return new WaitForSeconds(1f);
+        }
         textShieldCooldown.text = "";
         shieldCooldown = _shieldCooldown;
         shieldlaunched = false;
-        Debug.Log("coroutine arrêté");      
     }
 }
