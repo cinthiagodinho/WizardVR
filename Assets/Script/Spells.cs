@@ -102,16 +102,12 @@ public class Spells : MonoBehaviour
     void DoShield()
     {
         shieldlaunched = true;
+      
+        Quaternion rotation = Quaternion.LookRotation(playerHandR.forward, Vector3.up);
+        Vector3 betweenHandsPos = (playerHandL.position + playerHandR.position) / 2;
+        Vector3 pos = new Vector3(betweenHandsPos.x, betweenHandsPos.y, betweenHandsPos.z);        
+        GameObject shieldInstance = GameObject.Instantiate(shield, pos + transform.forward*2f, transform.rotation);
 
-        // FOR VR //
-        //Quaternion rotation = Quaternion.LookRotation(playerHandR.forward, Vector3.up);
-        //Vector3 betweenHandsPos = (playerHandL.position + playerHandR.position) / 2;
-        //Vector3 shieldPos = new Vector3(betweenHandsPos.x, betweenHandsPos.y, (betweenHandsPos.z + 1));   
-        //GameObject shieldInstance = GameObject.Instantiate(shield, Vector3.zero, rotation, this.gameObject.transform);
-
-        GameObject shieldInstance = GameObject.Instantiate(shield, gameObject.transform);
-        shieldInstance.transform.localPosition = new Vector3(0, 0, 1);
-        shieldInstance.transform.parent = null;
         StartCoroutine(IEDoShield(shieldInstance));
         StartCoroutine(ShieldCooldown());
     }
@@ -140,16 +136,15 @@ public class Spells : MonoBehaviour
     {
         zoneAttacklaunched = true;
 
-        // FOR VR //
-        //Quaternion rotation = Quaternion.LookRotation(playerHandR.forward, Vector3.up);
-        //Vector3 betweenHandsPos = (playerHandL.position + playerHandR.position) / 2;
-        //Vector3 pos = new Vector3(betweenHandsPos.x, betweenHandsPos.y, (betweenHandsPos.z + 1));   
-        //GameObject shieldInstance = GameObject.Instantiate(zoneAttack, Vector3.zero, rotation, this.gameObject.transform);
-
-        GameObject zoneAttackInstance = GameObject.Instantiate(zoneAttack, gameObject.transform);
+        /*GameObject zoneAttackInstance = GameObject.Instantiate(zoneAttack, gameObject.transform);
         zoneAttackInstance.transform.localPosition = new Vector3(0, -1.7f, 3);
         zoneAttackInstance.transform.localEulerAngles = new Vector3(90, 0, 0);
-        zoneAttackInstance.transform.parent = null;
+        zoneAttackInstance.transform.parent = null;*/
+      
+        Vector3 pos = new Vector3(transform.position.x, -1.7f, transform.position.z);        
+        GameObject zoneAttackInstance = GameObject.Instantiate(zoneAttack, pos + transform.forward*3f, zoneAttack.gameObject.transform.rotation);
+
+
         StartCoroutine(IEDoZoneAttack(zoneAttackInstance));
         StartCoroutine(ZoneAttackCooldown());
     }
