@@ -6,7 +6,6 @@ public class ShieldSpell : MonoBehaviour
 {
     Rigidbody rb;
     public float timeTillDeath;
-    public static float cooldown = 9;
 
     void Start()
     {

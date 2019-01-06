@@ -9,6 +9,7 @@ public class Player : MonoBehaviour
     private int lifePoints = 100;
     private Rigidbody rb;
     private float speed = 2.0f;
+   
     void Start()
     {
         lifeText.text = lifePoints.ToString();

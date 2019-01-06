@@ -10,10 +10,17 @@ public class Spells : MonoBehaviour
 {
     public GameObject fire;
     public GameObject shield;
+    public GameObject zoneAttack;
+
     public float shieldCooldown;
     private float _shieldCooldown;
-    public Text textShieldCooldown;
+    public Text shieldTextCooldown;
     private bool shieldlaunched = false;
+
+    public float zoneAttackCooldown;
+    private float _zoneAttackCooldown;
+    public Text zoneAttackTextCooldown;
+    private bool zoneAttacklaunched = false;
 
     VRGestureRig rig;
     IInput input;
@@ -72,6 +79,9 @@ public class Spells : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Keypad2) && !shieldlaunched)
             DoShield();
 
+        if (Input.GetKeyDown(KeyCode.Keypad3) && !zoneAttacklaunched)
+            DoZoneAttack();
+
     }
 
     void DoFire()
@@ -91,14 +101,14 @@ public class Spells : MonoBehaviour
 
     void DoShield()
     {
-        shieldlaunched = true;       
+        shieldlaunched = true;
 
         // FOR VR //
         //Quaternion rotation = Quaternion.LookRotation(playerHandR.forward, Vector3.up);
         //Vector3 betweenHandsPos = (playerHandL.position + playerHandR.position) / 2;
         //Vector3 shieldPos = new Vector3(betweenHandsPos.x, betweenHandsPos.y, (betweenHandsPos.z + 1));   
         //GameObject shieldInstance = GameObject.Instantiate(shield, Vector3.zero, rotation, this.gameObject.transform);
-       
+
         GameObject shieldInstance = GameObject.Instantiate(shield, gameObject.transform);
         shieldInstance.transform.localPosition = new Vector3(0, 0, 1);
         shieldInstance.transform.parent = null;
@@ -116,12 +126,50 @@ public class Spells : MonoBehaviour
     {
         while (shieldCooldown > -1)
         {
-            textShieldCooldown.text = shieldCooldown.ToString();
+            shieldTextCooldown.text = shieldCooldown.ToString();
             shieldCooldown--;
             yield return new WaitForSeconds(1f);
         }
-        textShieldCooldown.text = "";
+        shieldTextCooldown.text = "";
         shieldCooldown = _shieldCooldown;
         shieldlaunched = false;
+    }
+
+
+    void DoZoneAttack()
+    {
+        zoneAttacklaunched = true;
+
+        // FOR VR //
+        //Quaternion rotation = Quaternion.LookRotation(playerHandR.forward, Vector3.up);
+        //Vector3 betweenHandsPos = (playerHandL.position + playerHandR.position) / 2;
+        //Vector3 pos = new Vector3(betweenHandsPos.x, betweenHandsPos.y, (betweenHandsPos.z + 1));   
+        //GameObject shieldInstance = GameObject.Instantiate(zoneAttack, Vector3.zero, rotation, this.gameObject.transform);
+
+        GameObject zoneAttackInstance = GameObject.Instantiate(zoneAttack, gameObject.transform);
+        zoneAttackInstance.transform.localPosition = new Vector3(0, -1.7f, 3);
+        zoneAttackInstance.transform.localEulerAngles = new Vector3(90, 0, 0);
+        zoneAttackInstance.transform.parent = null;
+        StartCoroutine(IEDoZoneAttack(zoneAttackInstance));
+        StartCoroutine(ZoneAttackCooldown());
+    }
+
+    IEnumerator IEDoZoneAttack(GameObject zoneAttackInstance)
+    {
+        yield return new WaitForSeconds(.1f);
+        zoneAttackInstance.GetComponent<Collider>().enabled = true;
+    }
+
+    IEnumerator ZoneAttackCooldown()
+    {
+        while (zoneAttackCooldown > 0)
+        {
+            zoneAttackTextCooldown.text = zoneAttackCooldown.ToString();
+            zoneAttackCooldown--;
+            yield return new WaitForSeconds(1f);
+        }
+        zoneAttackTextCooldown.text = "";
+        zoneAttackCooldown = _shieldCooldown;
+        zoneAttacklaunched = false;
     }
 }
