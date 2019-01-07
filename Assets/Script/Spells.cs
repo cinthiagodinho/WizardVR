@@ -48,7 +48,7 @@ public class Spells : MonoBehaviour
     }
 
 
-    /*void OnEnable()
+    void OnEnable()
     {
         GestureRecognizer.GestureDetectedEvent += OnGestureDetected;
     }
@@ -68,19 +68,25 @@ public class Spells : MonoBehaviour
             case "Fire":
                 DoFire();
                 break;
+            case "Earth":
+                DoZoneAttack();
+                break;
+            case "Ice":
+                DoShield();
+                break;
         }
-    }*/
+    }
 
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Keypad1))
+        /* if (Input.GetKeyDown(KeyCode.Keypad1))
             DoFire();
 
         if (Input.GetKeyDown(KeyCode.Keypad2) && !shieldlaunched)
             DoShield();
 
         if (Input.GetKeyDown(KeyCode.Keypad3) && !zoneAttacklaunched)
-            DoZoneAttack();
+            DoZoneAttack();*/
 
     }
 

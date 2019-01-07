@@ -21,7 +21,7 @@ MonoBehaviour:
   beginInDetectMode: 0
   vrGestureDetectType: 0
   currentNeuralNet: Neural Net 1
-  lastNeuralNet: Neural Net 2
+  lastNeuralNet: Neural Net 1
   neuralNets:
   - Neural Net 1
   gestureBank:
@@ -37,18 +37,6 @@ MonoBehaviour:
     hand: 1
     isSynchronous: 0
     exampleCount: 38
-  - name: Air
-    hand: 1
-    isSynchronous: 1
-    exampleCount: 38
-  - name: Gravity
-    hand: 1
-    isSynchronous: 0
-    exampleCount: 36
-  - name: Pull
-    hand: 1
-    isSynchronous: 0
-    exampleCount: 22
   gestureBankPreEdit:
   - name: Fire
     hand: 1
@@ -62,17 +50,5 @@ MonoBehaviour:
     hand: 1
     isSynchronous: 0
     exampleCount: 38
-  - name: Air
-    hand: 1
-    isSynchronous: 1
-    exampleCount: 38
-  - name: Gravity
-    hand: 1
-    isSynchronous: 0
-    exampleCount: 36
-  - name: Pull
-    hand: 1
-    isSynchronous: 0
-    exampleCount: 22
   state: 0
   stateInitial: 0
