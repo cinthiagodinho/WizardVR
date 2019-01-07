@@ -91,10 +91,17 @@ public class Spells : MonoBehaviour
 
     void DoFire()
     {
-        Quaternion rotation = Quaternion.LookRotation(playerHandR.forward, Vector3.up);
+        /*Quaternion rotation = Quaternion.LookRotation(playerHandR.forward, Vector3.up);
         Vector3 betweenHandsPos = (playerHandL.position + playerHandR.position) / 2;
         Vector3 firePos = new Vector3(betweenHandsPos.x, betweenHandsPos.y, (betweenHandsPos.z + 0.5f));
-        GameObject fireInstance = GameObject.Instantiate(fire, firePos, rotation) as GameObject;
+        GameObject fireInstance = GameObject.Instantiate(fire, firePos, rotation) as GameObject;*/
+        
+       // Debug.Log("PLAYER HAND R POSITION : " + playerHandR.position);
+        //Vector3 firePos = new Vector3(playerHandR.position.x, playerHandR.position.y, playerHandR.position.z + 0.5f);
+       // Debug.Log("FIRE POSITION : " + firePos);
+       // GameObject fireInstance = GameObject.Instantiate(fire, firePos, playerHandR.rotation);
+        GameObject fireInstance = GameObject.Instantiate(fire, playerHandR.position, playerHandR.rotation);
+
         StartCoroutine(IEDoFire(fireInstance));
     }
 
@@ -108,13 +115,13 @@ public class Spells : MonoBehaviour
     {
         shieldlaunched = true;
 
-       /* Quaternion rotation = Quaternion.LookRotation(playerHandR.forward, Vector3.up);
-        Vector3 betweenHandsPos = (playerHandL.position + playerHandR.position) / 2;
-        Vector3 pos = new Vector3(betweenHandsPos.x, betweenHandsPos.y, betweenHandsPos.z);
-        GameObject shieldInstance = GameObject.Instantiate(shield, pos + transform.forward * 2f, transform.rotation);
-*/
+        /* Quaternion rotation = Quaternion.LookRotation(playerHandR.forward, Vector3.up);
+         Vector3 betweenHandsPos = (playerHandL.position + playerHandR.position) / 2;
+         Vector3 pos = new Vector3(betweenHandsPos.x, betweenHandsPos.y, betweenHandsPos.z);
+         GameObject shieldInstance = GameObject.Instantiate(shield, pos + transform.forward * 2f, transform.rotation);
+ */
         //Quaternion rotation = Quaternion.LookRotation(Vector3.forward, Vector3.up);
-       
+
         Vector3 pos = new Vector3(playerHandR.position.x, 0, playerHandR.position.z) + transform.forward * 2f;
         GameObject shieldInstance = GameObject.Instantiate(shield, pos, transform.rotation);
 
