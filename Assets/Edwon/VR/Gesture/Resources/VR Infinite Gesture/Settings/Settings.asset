@@ -3,7 +3,7 @@
 --- !u!114 &11400000
 MonoBehaviour:
   m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
+  m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 0}
   m_Enabled: 1
@@ -25,30 +25,38 @@ MonoBehaviour:
   neuralNets:
   - Neural Net 1
   gestureBank:
-  - name: Fire
+  - name: EnergyShield
     hand: 1
     isSynchronous: 0
-    exampleCount: 20
-  - name: Earth
+    exampleCount: 100
+  - name: FireBall
     hand: 1
     isSynchronous: 0
-    exampleCount: 22
-  - name: Ice
+    exampleCount: 100
+  - name: Inferno
     hand: 1
     isSynchronous: 0
-    exampleCount: 38
+    exampleCount: 100
+  - name: Gesture 7
+    hand: 1
+    isSynchronous: 1
+    exampleCount: 100
   gestureBankPreEdit:
-  - name: Fire
+  - name: EnergyShield
     hand: 1
     isSynchronous: 0
-    exampleCount: 20
-  - name: Earth
+    exampleCount: 100
+  - name: FireBall
     hand: 1
     isSynchronous: 0
-    exampleCount: 22
-  - name: Ice
+    exampleCount: 100
+  - name: Inferno
     hand: 1
     isSynchronous: 0
-    exampleCount: 38
+    exampleCount: 100
+  - name: Gesture 7
+    hand: 1
+    isSynchronous: 1
+    exampleCount: 100
   state: 0
   stateInitial: 0
