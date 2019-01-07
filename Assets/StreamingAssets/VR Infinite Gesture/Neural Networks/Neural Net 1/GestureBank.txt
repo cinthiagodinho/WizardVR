@@ -17,6 +17,30 @@
             "hand": 1,
             "isSynchronous": false,
             "exampleCount": 38
+        },
+        {
+            "name": "Gesture 4",
+            "hand": 1,
+            "isSynchronous": false,
+            "exampleCount": 100
+        },
+        {
+            "name": "Gesture 5",
+            "hand": 1,
+            "isSynchronous": false,
+            "exampleCount": 100
+        },
+        {
+            "name": "Gesture 6",
+            "hand": 1,
+            "isSynchronous": false,
+            "exampleCount": 100
+        },
+        {
+            "name": "Gesture 7",
+            "hand": 1,
+            "isSynchronous": true,
+            "exampleCount": 0
         }
     ]
 }
