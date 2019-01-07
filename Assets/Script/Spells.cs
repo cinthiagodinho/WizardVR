@@ -12,14 +12,8 @@ public class Spells : MonoBehaviour
     public GameObject shield;
     public GameObject zoneAttack;
 
-    public float shieldCooldown;
-    private float _shieldCooldown;
-    public Text shieldTextCooldown;
+    //For testing without VR
     //private bool shieldlaunched = false;
-
-    public float zoneAttackCooldown;
-    private float _zoneAttackCooldown;
-    public Text zoneAttackTextCooldown;
     //private bool zoneAttacklaunched = false;
 
     VRGestureRig rig;
@@ -44,7 +38,6 @@ public class Spells : MonoBehaviour
 
         input = rig.GetInput(rig.mainHand);
 
-        _shieldCooldown = shieldCooldown;
     }
 
     void OnEnable()
@@ -64,13 +57,13 @@ public class Spells : MonoBehaviour
 
         switch (gestureName)
         {
-            case "Fire":
+            case "FireBall":
                 DoFire();
                 break;
-            case "Earth":
+            case "Inferno":
                 DoZoneAttack();
                 break;
-            case "Ice":
+            case "EnergyShield":
                 DoShield();
                 break;
         }
@@ -78,6 +71,7 @@ public class Spells : MonoBehaviour
 
     void Update()
     {
+        //For testing without VR
         /*if (Input.GetKeyDown(KeyCode.A))
             DoFire();
 
@@ -110,8 +104,7 @@ public class Spells : MonoBehaviour
         shieldInstance.transform.localEulerAngles = new Vector3(0, 90, 0);
         shieldInstance.transform.parent = null;
 
-        StartCoroutine(IEDoShield(shieldInstance));
-        StartCoroutine(ShieldCooldown());
+        StartCoroutine(IEDoShield(shieldInstance));        
     }
 
     IEnumerator IEDoShield(GameObject shieldInstance)
@@ -120,45 +113,17 @@ public class Spells : MonoBehaviour
         shieldInstance.GetComponent<Collider>().enabled = true;
     }
 
-    IEnumerator ShieldCooldown()
-    {
-        while (shieldCooldown > -1)
-        {
-            shieldTextCooldown.text = shieldCooldown.ToString();
-            shieldCooldown--;
-            yield return new WaitForSeconds(1f);
-        }
-        shieldTextCooldown.text = "";
-        shieldCooldown = _shieldCooldown;
-        //shieldlaunched = false;
-    }
-
-
     void DoZoneAttack()
     {
         // zoneAttacklaunched = true;          
         GameObject zoneAttackInstance = GameObject.Instantiate(zoneAttack, playerHead.transform.position + (playerHead.transform.forward * 3), zoneAttack.transform.rotation);
         zoneAttackInstance.transform.position =  new Vector3(zoneAttackInstance.transform.position.x, -1.7f, zoneAttackInstance.transform.position.z);
-        StartCoroutine(IEDoZoneAttack(zoneAttackInstance));
-        StartCoroutine(ZoneAttackCooldown());
+        StartCoroutine(IEDoZoneAttack(zoneAttackInstance));        
     }
 
     IEnumerator IEDoZoneAttack(GameObject zoneAttackInstance)
     {
         yield return new WaitForSeconds(.1f);
         zoneAttackInstance.GetComponent<Collider>().enabled = true;
-    }
-
-    IEnumerator ZoneAttackCooldown()
-    {
-        while (zoneAttackCooldown > 0)
-        {
-            zoneAttackTextCooldown.text = zoneAttackCooldown.ToString();
-            zoneAttackCooldown--;
-            yield return new WaitForSeconds(1f);
-        }
-        zoneAttackTextCooldown.text = "";
-        zoneAttackCooldown = _shieldCooldown;
-        //zoneAttacklaunched = false;
     }
 }
