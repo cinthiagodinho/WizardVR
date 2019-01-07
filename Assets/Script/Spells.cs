@@ -15,7 +15,7 @@ public class Spells : MonoBehaviour
     public float shieldCooldown;
     private float _shieldCooldown;
     public Text shieldTextCooldown;
-   //private bool shieldlaunched = false;
+    //private bool shieldlaunched = false;
 
     public float zoneAttackCooldown;
     private float _zoneAttackCooldown;
@@ -104,7 +104,7 @@ public class Spells : MonoBehaviour
 
     void DoShield()
     {
-       // shieldlaunched = true;
+        // shieldlaunched = true;
         GameObject shieldInstance = GameObject.Instantiate(shield, playerHandR.transform);
         shieldInstance.transform.localPosition = new Vector3(0.2f, 0, 2);
         shieldInstance.transform.localEulerAngles = new Vector3(0, 90, 0);
@@ -136,16 +136,9 @@ public class Spells : MonoBehaviour
 
     void DoZoneAttack()
     {
-       // zoneAttacklaunched = true;
-
-        /* Vector3 pos = new Vector3(transform.position.x, -1.7f, transform.position.z);
-        GameObject zoneAttackInstance = GameObject.Instantiate(zoneAttack, pos + transform.forward * 3f, zoneAttack.gameObject.transform.rotation);
-*/
-        GameObject zoneAttackInstance = GameObject.Instantiate(zoneAttack, playerHandR.transform);
-        zoneAttackInstance.transform.localPosition = new Vector3(0.2f, 0, 2);
-       // zoneAttackInstance.transform.localEulerAngles = new Vector3(0, 0, 0);
-        zoneAttackInstance.transform.parent = null;
-
+        // zoneAttacklaunched = true;          
+        GameObject zoneAttackInstance = GameObject.Instantiate(zoneAttack, playerHead.transform.position + (playerHead.transform.forward * 3), zoneAttack.transform.rotation);
+        zoneAttackInstance.transform.position =  new Vector3(zoneAttackInstance.transform.position.x, -1.7f, zoneAttackInstance.transform.position.z);
         StartCoroutine(IEDoZoneAttack(zoneAttackInstance));
         StartCoroutine(ZoneAttackCooldown());
     }

@@ -10,7 +10,7 @@ public class ShieldSpell : MonoBehaviour
     void Start()
     {
         rb = GetComponent<Rigidbody>();     
-       // StartCoroutine(DestroySelf());
+        StartCoroutine(DestroySelf());
     }
 
     void FixedUpdate()

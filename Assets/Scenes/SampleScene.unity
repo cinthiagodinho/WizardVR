@@ -2170,7 +2170,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   fire: {fileID: 130144, guid: 3a73fd7a773a8894296d6dc633f9c5bf, type: 2}
   shield: {fileID: 1868405468129700, guid: c376e3f6d6985154c8893fb0aa8d3dda, type: 2}
-  zoneAttack: {fileID: 1911038833189320, guid: 9cdb8fcb5421356488d8f216e9d81db5, type: 2}
+  zoneAttack: {fileID: 1017700590560932, guid: 9cdb8fcb5421356488d8f216e9d81db5, type: 2}
   shieldCooldown: 3
   shieldTextCooldown: {fileID: 506270354}
   zoneAttackCooldown: 5
