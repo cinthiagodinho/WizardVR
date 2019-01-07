@@ -3,7 +3,7 @@
 --- !u!114 &11400000
 MonoBehaviour:
   m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 0}
   m_Enabled: 1
@@ -21,7 +21,7 @@ MonoBehaviour:
   beginInDetectMode: 0
   vrGestureDetectType: 0
   currentNeuralNet: Neural Net 1
-  lastNeuralNet: Neural Net 1
+  lastNeuralNet: Neural Net 2
   neuralNets:
   - Neural Net 1
   gestureBank:
