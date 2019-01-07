@@ -117,7 +117,7 @@ public class Spells : MonoBehaviour
     {
         // zoneAttacklaunched = true;          
         GameObject zoneAttackInstance = GameObject.Instantiate(zoneAttack, playerHead.transform.position + (playerHead.transform.forward * 3), zoneAttack.transform.rotation);
-        zoneAttackInstance.transform.position =  new Vector3(zoneAttackInstance.transform.position.x, -1.7f, zoneAttackInstance.transform.position.z);
+        zoneAttackInstance.transform.position =  new Vector3(zoneAttackInstance.transform.position.x, -2.50f, zoneAttackInstance.transform.position.z);
         StartCoroutine(IEDoZoneAttack(zoneAttackInstance));        
     }
 
