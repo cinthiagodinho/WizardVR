@@ -5,14 +5,14 @@ using UnityEngine.UI;
 
 public class Opponent : MonoBehaviour
 {
-    public Text lifeText;
-    private int lifePoints = 100;
+    //public Text lifeText;
+    //private int lifePoints = 100;
     public GameObject fire;
     Transform opp;
 
     void Start()
     {
-        lifeText.text = lifePoints.ToString();
+        //lifeText.text = lifePoints.ToString();
         opp = gameObject.transform;
     }
 
@@ -38,8 +38,8 @@ public class Opponent : MonoBehaviour
 IEnumerator Hurt(int damage)
 {
     this.GetComponent<MeshRenderer>().material.color = Color.red;
-    lifePoints -= damage;
-    lifeText.text = lifePoints.ToString();
+    //lifePoints -= damage;
+    //lifeText.text = lifePoints.ToString();
     yield return new WaitForSeconds(0.5f);
     this.GetComponent<MeshRenderer>().material.color = Color.black;
     StopCoroutine(Hurt(0));

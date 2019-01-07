@@ -71,10 +71,10 @@ namespace Edwon.VR
 
         }
 
-        public void OnLevelWasLoaded()
-        {
-            Start();
-        }
+      //  public void OnLevelWasLoaded()
+      //  {
+      //      Start();
+      //  }
 
         public void AddController(ILaserPointer controller)
         {

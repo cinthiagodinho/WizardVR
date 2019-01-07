@@ -5,14 +5,14 @@ using UnityEngine.UI;
 public class Player : MonoBehaviour
 {
 
-    public Text lifeText;
-    private int lifePoints = 100;
+    //public Text lifeText;
+   //private int lifePoints = 100;
     private Rigidbody rb;
     private float speed = 2.0f;
    
     void Start()
     {
-        lifeText.text = lifePoints.ToString();
+        //lifeText.text = lifePoints.ToString();
         rb = GetComponent<Rigidbody>();
     }
 
@@ -28,8 +28,8 @@ public class Player : MonoBehaviour
     {
         if (collision.gameObject.GetComponent<FirePower>())
         {
-            lifePoints--;
-            lifeText.text = lifePoints.ToString();
+            //lifePoints--;
+            //lifeText.text = lifePoints.ToString();
             //StartCoroutine("Hurt");
         }
 

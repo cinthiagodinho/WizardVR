@@ -92,7 +92,6 @@ namespace Edwon.VR.Gesture
 
         void DoEarth()
         {
-
             float explosionForce = 300f;
 
             Quaternion rotation = Quaternion.LookRotation(Vector3.forward, Vector3.up);
