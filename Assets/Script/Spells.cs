@@ -47,7 +47,6 @@ public class Spells : MonoBehaviour
         _shieldCooldown = shieldCooldown;
     }
 
-
     void OnEnable()
     {
         GestureRecognizer.GestureDetectedEvent += OnGestureDetected;
@@ -79,14 +78,14 @@ public class Spells : MonoBehaviour
 
     void Update()
     {
-        /* if (Input.GetKeyDown(KeyCode.Keypad1))
+        if (Input.GetKeyDown(KeyCode.A))
             DoFire();
 
-        if (Input.GetKeyDown(KeyCode.Keypad2) && !shieldlaunched)
-            DoShield();
+        /* if (Input.GetKeyDown(KeyCode.Keypad2) && !shieldlaunched)
+             DoShield();
 
-        if (Input.GetKeyDown(KeyCode.Keypad3) && !zoneAttacklaunched)
-            DoZoneAttack();*/
+         if (Input.GetKeyDown(KeyCode.Keypad3) && !zoneAttacklaunched)
+             DoZoneAttack();*/
 
     }
 
@@ -108,11 +107,16 @@ public class Spells : MonoBehaviour
     void DoShield()
     {
         shieldlaunched = true;
-      
-        Quaternion rotation = Quaternion.LookRotation(playerHandR.forward, Vector3.up);
+
+       /* Quaternion rotation = Quaternion.LookRotation(playerHandR.forward, Vector3.up);
         Vector3 betweenHandsPos = (playerHandL.position + playerHandR.position) / 2;
-        Vector3 pos = new Vector3(betweenHandsPos.x, betweenHandsPos.y, betweenHandsPos.z);        
-        GameObject shieldInstance = GameObject.Instantiate(shield, pos + transform.forward*2f, transform.rotation);
+        Vector3 pos = new Vector3(betweenHandsPos.x, betweenHandsPos.y, betweenHandsPos.z);
+        GameObject shieldInstance = GameObject.Instantiate(shield, pos + transform.forward * 2f, transform.rotation);
+*/
+        //Quaternion rotation = Quaternion.LookRotation(Vector3.forward, Vector3.up);
+       
+        Vector3 pos = new Vector3(playerHandR.position.x, 0, playerHandR.position.z) + transform.forward * 2f;
+        GameObject shieldInstance = GameObject.Instantiate(shield, pos, transform.rotation);
 
         StartCoroutine(IEDoShield(shieldInstance));
         StartCoroutine(ShieldCooldown());
@@ -142,13 +146,11 @@ public class Spells : MonoBehaviour
     {
         zoneAttacklaunched = true;
 
-        /*GameObject zoneAttackInstance = GameObject.Instantiate(zoneAttack, gameObject.transform);
-        zoneAttackInstance.transform.localPosition = new Vector3(0, -1.7f, 3);
-        zoneAttackInstance.transform.localEulerAngles = new Vector3(90, 0, 0);
-        zoneAttackInstance.transform.parent = null;*/
-      
-        Vector3 pos = new Vector3(transform.position.x, -1.7f, transform.position.z);        
-        GameObject zoneAttackInstance = GameObject.Instantiate(zoneAttack, pos + transform.forward*3f, zoneAttack.gameObject.transform.rotation);
+        /* Vector3 pos = new Vector3(transform.position.x, -1.7f, transform.position.z);
+        GameObject zoneAttackInstance = GameObject.Instantiate(zoneAttack, pos + transform.forward * 3f, zoneAttack.gameObject.transform.rotation);
+*/
+        Vector3 pos = new Vector3(playerHandR.position.x, -1.7f, playerHandR.position.z) + transform.forward * 2f;
+        GameObject zoneAttackInstance = GameObject.Instantiate(zoneAttack, pos, transform.rotation);
 
 
         StartCoroutine(IEDoZoneAttack(zoneAttackInstance));
