@@ -13,8 +13,8 @@ public class Spells : MonoBehaviour
     public GameObject zoneAttack;
 
     //For testing without VR
-    //private bool shieldlaunched = false;
-    //private bool zoneAttacklaunched = false;
+    private bool shieldlaunched = false;
+    private bool zoneAttacklaunched = false;
 
     VRGestureRig rig;
     IInput input;
@@ -72,14 +72,14 @@ public class Spells : MonoBehaviour
     void Update()
     {
         //For testing without VR
-        /*if (Input.GetKeyDown(KeyCode.A))
+        if (Input.GetKeyDown(KeyCode.A))
             DoFire();
 
-         if (Input.GetKeyDown(KeyCode.Keypad2) && !shieldlaunched)
+         if (Input.GetKeyDown(KeyCode.Z) && !shieldlaunched)
              DoShield();
 
-         if (Input.GetKeyDown(KeyCode.Keypad3) && !zoneAttacklaunched)
-             DoZoneAttack();*/
+         if (Input.GetKeyDown(KeyCode.E) && !zoneAttacklaunched)
+             DoZoneAttack();
 
     }
 
@@ -98,7 +98,7 @@ public class Spells : MonoBehaviour
 
     void DoShield()
     {
-        // shieldlaunched = true;
+        shieldlaunched = true;
         GameObject shieldInstance = GameObject.Instantiate(shield, playerHandR.transform);
         shieldInstance.transform.localPosition = new Vector3(0.2f, 0, 2);
         shieldInstance.transform.localEulerAngles = new Vector3(0, 90, 0);
@@ -115,7 +115,7 @@ public class Spells : MonoBehaviour
 
     void DoZoneAttack()
     {
-        // zoneAttacklaunched = true;          
+        zoneAttacklaunched = true;          
         /*GameObject zoneAttackInstance = GameObject.Instantiate(zoneAttack, playerHead.transform.position + (playerHead.transform.forward * 3), zoneAttack.transform.rotation);
      */
         GameObject zoneAttackInstance = GameObject.Instantiate(zoneAttack, playerHandR.transform.position + (playerHandR.transform.forward * 3), zoneAttack.transform.rotation);
