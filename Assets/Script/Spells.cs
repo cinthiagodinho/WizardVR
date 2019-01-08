@@ -104,7 +104,7 @@ public class Spells : MonoBehaviour
         shieldInstance.transform.localEulerAngles = new Vector3(0, 90, 0);
         shieldInstance.transform.parent = null;
 
-        StartCoroutine(IEDoShield(shieldInstance));        
+        StartCoroutine(IEDoShield(shieldInstance));
     }
 
     IEnumerator IEDoShield(GameObject shieldInstance)
@@ -116,9 +116,11 @@ public class Spells : MonoBehaviour
     void DoZoneAttack()
     {
         // zoneAttacklaunched = true;          
-        GameObject zoneAttackInstance = GameObject.Instantiate(zoneAttack, playerHead.transform.position + (playerHead.transform.forward * 3), zoneAttack.transform.rotation);
-        zoneAttackInstance.transform.position =  new Vector3(zoneAttackInstance.transform.position.x, -2.50f, zoneAttackInstance.transform.position.z);
-        StartCoroutine(IEDoZoneAttack(zoneAttackInstance));        
+        /*GameObject zoneAttackInstance = GameObject.Instantiate(zoneAttack, playerHead.transform.position + (playerHead.transform.forward * 3), zoneAttack.transform.rotation);
+     */
+        GameObject zoneAttackInstance = GameObject.Instantiate(zoneAttack, playerHandR.transform.position + (playerHandR.transform.forward * 3), zoneAttack.transform.rotation);
+        zoneAttackInstance.transform.position = new Vector3(zoneAttackInstance.transform.position.x, -2.50f, zoneAttackInstance.transform.position.z);
+        StartCoroutine(IEDoZoneAttack(zoneAttackInstance));
     }
 
     IEnumerator IEDoZoneAttack(GameObject zoneAttackInstance)
