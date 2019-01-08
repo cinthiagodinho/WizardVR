@@ -68,17 +68,6 @@ public class Spells : MonoBehaviour
             case "EnergyShield":
                 DoShield();
                 break;
-            case "Telekinesis":
-                if (!telekinesisOn)
-                {
-                    target = null;
-                    DoTelekinesis();
-                }
-                break;
-            case "StopTelekinesis":
-                if (telekinesisOn)
-                    StopTelekinesis(target);
-                break;
         }
     }
 
@@ -101,11 +90,20 @@ public class Spells : MonoBehaviour
                 target = null;
                 DoTelekinesis();
             }
+        }*/
+        //Debug.DrawRay(playerHandR.transform.position, playerHandR.transform.TransformDirection(Vector3.forward) * 15, Color.yellow);
+    }
+    void FixedUpdate()
+    {
+        if (OVRInput.Get(OVRInput.Axis1D.SecondaryHandTrigger, OVRInput.Controller.Touch) > 0)
+        {
+            if (!telekinesisOn && target == null)
+                DoTelekinesis();
         }
-        Debug.DrawRay(playerHandR.transform.position, playerHandR.transform.TransformDirection(Vector3.forward) * 10, Color.yellow);
-*/
-        if(Input.GetButtonDown("Axis1D.SecondaryHandTrigger")){
-            Debug.Log("pouet");
+        else
+        {
+            if (telekinesisOn && target != null)
+                StopTelekinesis(target);
         }
     }
 
@@ -157,23 +155,32 @@ public class Spells : MonoBehaviour
 
     void DoTelekinesis()
     {
-        telekinesisOn = true;
-
         RaycastHit hit;
         Vector3 fwd = playerHandR.transform.TransformDirection(Vector3.forward);
-        int layerMask = 1 << 8;
-
-        if (Physics.Raycast(playerHandR.transform.position, fwd, out hit, 10, layerMask))
+        //int layerMask = 1 << 8;
+        //Debug.Log("do telekinesis");
+        if (Physics.Raycast(playerHandR.transform.position, fwd, out hit, 15))
         {
-            target = hit.transform.gameObject;
-            target.transform.parent = playerHandR.transform;
-            target.AddComponent<TelekinesisSpell>();
+            if (hit.transform.gameObject.tag == "Interactable")
+            {
+                telekinesisOn = true;
+                target = hit.transform.gameObject;
+                target.transform.parent = playerHandR.transform;
+                this.GetComponent<MeshRenderer>().material.color = Color.blue;
+                this.GetComponent<Rigidbody>().isKinematic = true;
+                //Debug.Log(target);
+            }
         }
     }
 
-    public static void StopTelekinesis(GameObject go)
+    void StopTelekinesis(GameObject go)
     {
-        Destroy(go.GetComponent<TelekinesisSpell>());
+        go.GetComponent<Rigidbody>().isKinematic = false;
+        go.GetComponent<MeshRenderer>().material.color = Color.red;
+        go.transform.parent = null;
+        go.GetComponent<Rigidbody>().AddForce(3, 3, 3);        
         telekinesisOn = false;
+        target = null;
+        //Debug.Log("stop telekinesis");
     }
 }
