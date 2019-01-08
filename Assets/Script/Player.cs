@@ -19,9 +19,9 @@ public class Player : MonoBehaviour
     //For tests without VR
     void FixedUpdate()
     {
-       float h = speed * Input.GetAxis("Horizontal");
+       /* float h = speed * Input.GetAxis("Horizontal");
        float v = -speed * Input.GetAxis("Vertical");
-        transform.Rotate(v, h, 0);
+        transform.Rotate(v, h, 0);*/
 
     }
     void OnCollisionEnter(Collision collision)

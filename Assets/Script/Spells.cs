@@ -16,6 +16,7 @@ public class Spells : MonoBehaviour
     private bool shieldlaunched = false;
     private bool zoneAttacklaunched = false;
 
+    public static bool telekinesisOn = false;
     VRGestureRig rig;
     IInput input;
 
@@ -23,6 +24,7 @@ public class Spells : MonoBehaviour
     Transform playerHandL;
     Transform playerHandR;
 
+    private GameObject target;
 
     void Start()
     {
@@ -66,20 +68,44 @@ public class Spells : MonoBehaviour
             case "EnergyShield":
                 DoShield();
                 break;
+            case "Telekinesis":
+                if (!telekinesisOn)
+                {
+                    target = null;
+                    DoTelekinesis();
+                }
+                break;
+            case "StopTelekinesis":
+                if (telekinesisOn)
+                    StopTelekinesis(target);
+                break;
         }
     }
 
     void Update()
     {
         //For testing without VR
-        if (Input.GetKeyDown(KeyCode.A))
+        /* if (Input.GetKeyDown(KeyCode.A))
             DoFire();
 
-         if (Input.GetKeyDown(KeyCode.Z) && !shieldlaunched)
-             DoShield();
+        if (Input.GetKeyDown(KeyCode.Z) && !shieldlaunched)
+            DoShield();
 
-         if (Input.GetKeyDown(KeyCode.E) && !zoneAttacklaunched)
-             DoZoneAttack();
+        if (Input.GetKeyDown(KeyCode.E) && !zoneAttacklaunched)
+            DoZoneAttack();
+
+        if (Input.GetKeyDown(KeyCode.R))
+        {
+            if (!telekinesisOn)
+            {
+                target = null;
+                DoTelekinesis();
+            }
+
+        }
+*/
+
+        Debug.DrawRay(playerHandR.transform.position, playerHandR.transform.TransformDirection(Vector3.forward) * 10, Color.yellow);
 
     }
 
@@ -115,7 +141,7 @@ public class Spells : MonoBehaviour
 
     void DoZoneAttack()
     {
-        zoneAttacklaunched = true;          
+        zoneAttacklaunched = true;
         /*GameObject zoneAttackInstance = GameObject.Instantiate(zoneAttack, playerHead.transform.position + (playerHead.transform.forward * 3), zoneAttack.transform.rotation);
      */
         GameObject zoneAttackInstance = GameObject.Instantiate(zoneAttack, playerHandR.transform.position + (playerHandR.transform.forward * 3), zoneAttack.transform.rotation);
@@ -127,5 +153,27 @@ public class Spells : MonoBehaviour
     {
         yield return new WaitForSeconds(.1f);
         zoneAttackInstance.GetComponent<Collider>().enabled = true;
+    }
+
+    void DoTelekinesis()
+    {
+        telekinesisOn = true;
+
+        RaycastHit hit;
+        Vector3 fwd = playerHandR.transform.TransformDirection(Vector3.forward);
+        int layerMask = 1 << 8;
+
+        if (Physics.Raycast(playerHandR.transform.position, fwd, out hit, 10, layerMask))
+        {
+            target = hit.transform.gameObject;
+            target.transform.parent = playerHandR.transform;
+            target.AddComponent<TelekinesisSpell>();
+        }
+    }
+
+    public static void StopTelekinesis(GameObject go)
+    {
+        Destroy(go.GetComponent<TelekinesisSpell>());
+        telekinesisOn = false;
     }
 }
