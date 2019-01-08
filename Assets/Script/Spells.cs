@@ -101,12 +101,12 @@ public class Spells : MonoBehaviour
                 target = null;
                 DoTelekinesis();
             }
-
         }
-*/
-
         Debug.DrawRay(playerHandR.transform.position, playerHandR.transform.TransformDirection(Vector3.forward) * 10, Color.yellow);
-
+*/
+        if(Input.GetButtonDown("Axis1D.SecondaryHandTrigger")){
+            Debug.Log("pouet");
+        }
     }
 
     void DoFire()
