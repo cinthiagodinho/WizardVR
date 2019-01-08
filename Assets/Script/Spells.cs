@@ -10,11 +10,11 @@ public class Spells : MonoBehaviour
 {
     public GameObject fire;
     public GameObject shield;
-    public GameObject zoneAttack;
+    public GameObject areaSpell;
 
     //For testing without VR
     private bool shieldlaunched = false;
-    private bool zoneAttacklaunched = false;
+    private bool areaSpelllaunched = false;
 
     public static bool telekinesisOn = false;
     VRGestureRig rig;
@@ -62,8 +62,8 @@ public class Spells : MonoBehaviour
             case "FireBall":
                 DoFire();
                 break;
-            case "Inferno":
-                DoZoneAttack();
+            case "areaSpell":
+                DoareaSpell();
                 break;
             case "EnergyShield":
                 DoShield();
@@ -74,14 +74,14 @@ public class Spells : MonoBehaviour
     void Update()
     {
         //For testing without VR
-        /* if (Input.GetKeyDown(KeyCode.A))
+        if (Input.GetKeyDown(KeyCode.A))
             DoFire();
 
         if (Input.GetKeyDown(KeyCode.Z) && !shieldlaunched)
             DoShield();
 
-        if (Input.GetKeyDown(KeyCode.E) && !zoneAttacklaunched)
-            DoZoneAttack();
+        if (Input.GetKeyDown(KeyCode.E) && !areaSpelllaunched)
+            DoareaSpell();
 
         if (Input.GetKeyDown(KeyCode.R))
         {
@@ -90,8 +90,7 @@ public class Spells : MonoBehaviour
                 target = null;
                 DoTelekinesis();
             }
-        }*/
-        //Debug.DrawRay(playerHandR.transform.position, playerHandR.transform.TransformDirection(Vector3.forward) * 15, Color.yellow);
+        }       
     }
     void FixedUpdate()
     {
@@ -137,20 +136,20 @@ public class Spells : MonoBehaviour
         shieldInstance.GetComponent<Collider>().enabled = true;
     }
 
-    void DoZoneAttack()
+    void DoareaSpell()
     {
-        zoneAttacklaunched = true;
-        /*GameObject zoneAttackInstance = GameObject.Instantiate(zoneAttack, playerHead.transform.position + (playerHead.transform.forward * 3), zoneAttack.transform.rotation);
+        areaSpelllaunched = true;
+        /*GameObject areaSpellInstance = GameObject.Instantiate(areaSpell, playerHead.transform.position + (playerHead.transform.forward * 3), areaSpell.transform.rotation);
      */
-        GameObject zoneAttackInstance = GameObject.Instantiate(zoneAttack, playerHandR.transform.position + (playerHandR.transform.forward * 3), zoneAttack.transform.rotation);
-        zoneAttackInstance.transform.position = new Vector3(zoneAttackInstance.transform.position.x, -2.50f, zoneAttackInstance.transform.position.z);
-        StartCoroutine(IEDoZoneAttack(zoneAttackInstance));
+        GameObject areaSpellInstance = GameObject.Instantiate(areaSpell, playerHandR.transform.position + (playerHandR.transform.forward * 3), areaSpell.transform.rotation);
+        areaSpellInstance.transform.position = new Vector3(areaSpellInstance.transform.position.x, -2.50f, areaSpellInstance.transform.position.z);
+        StartCoroutine(IEDoareaSpell(areaSpellInstance));
     }
 
-    IEnumerator IEDoZoneAttack(GameObject zoneAttackInstance)
+    IEnumerator IEDoareaSpell(GameObject areaSpellInstance)
     {
         yield return new WaitForSeconds(.1f);
-        zoneAttackInstance.GetComponent<Collider>().enabled = true;
+        areaSpellInstance.GetComponent<Collider>().enabled = true;
     }
 
     void DoTelekinesis()
