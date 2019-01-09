@@ -14,13 +14,12 @@ public class Opponent : MonoBehaviour
     public GameObject fire;
     public float fireDuration;
     public float infernoDuration;
-    Transform opp;
+    public Transform opp;
     public int isTouched = 0;
 
     void Start()
     {
         //lifeText.text = lifePoints.ToString();
-        opp = gameObject.transform;
         baseMesh = mesh.material.color;
         baseJoint = joint.material.color;
     }
@@ -38,8 +37,8 @@ public class Opponent : MonoBehaviour
             isTouched = 0;
         }
 
-        // if (Input.GetKeyDown(KeyCode.Keypad7))
-        //     DoFire();
+        if (Input.GetKeyDown(KeyCode.P))
+            DoFire();
     }
 
     void OnTriggerEnter(Collider collision)
@@ -65,8 +64,12 @@ public class Opponent : MonoBehaviour
 
     void DoFire()
     {
-        Quaternion rotation = Quaternion.LookRotation(-opp.forward, Vector3.up);
-        Vector3 vect = new Vector3(opp.position.x, opp.position.y, (opp.position.z - 0.5f));
+        Vector3 oppForwardOnFloor = Vector3.ProjectOnPlane(opp.forward, Vector3.up);
+        // tir avec orientation libre
+        //Quaternion rotation = Quaternion.LookRotation(opp.forward, Vector3.up);
+        // tir toujours parallèle au sol
+        Quaternion rotation = Quaternion.LookRotation(oppForwardOnFloor, Vector3.up);
+        Vector3 vect = opp.position + opp.forward * 0.5f;
         Debug.Log(vect);
         GameObject fireInstance = GameObject.Instantiate(fire, vect, rotation) as GameObject;
         StartCoroutine(IEDoFire(fireInstance));
