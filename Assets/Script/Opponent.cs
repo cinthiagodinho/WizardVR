@@ -23,7 +23,7 @@ public class Opponent : MonoBehaviour
         if (collision.gameObject.GetComponent<FirePower>())
         {
             gameObject.transform.GetChild(1).GetComponent<SkinnedMeshRenderer>().material.color = Color.red;
-            StartCoroutine(Hurt(1, fireDuration));
+            //StartCoroutine(Hurt(1, fireDuration));
         }
     }
 

@@ -31,7 +31,10 @@ public class FirePower : MonoBehaviour
     IEnumerator DestroySelf(Collision collision)
     {
         deathBegan = true;
-        GameObject.Instantiate(fireExplosion, collision.contacts[0].point, Quaternion.identity);
+        GameObject explosion = GameObject.Instantiate(fireExplosion, collision.contacts[0].point, Quaternion.identity);
+        //Rigidbody rb = collision.gameObject.GetComponent<Rigidbody>();
+        //rb.AddExplosionForce(explosion.GetComponent<FirePowerExplosion>().getExplosionForce(), transform.position, explosion.GetComponent<FirePowerExplosion>().getExplosionSize());
+        //Debug.Log(rb);
         yield return new WaitForSeconds(timeTillDeath);
         Destroy(gameObject);
     }
