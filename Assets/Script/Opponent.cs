@@ -7,24 +7,39 @@ public class Opponent : MonoBehaviour
 {
     //public Text lifeText;
     public int health;
+    public SkinnedMeshRenderer mesh;
+    public SkinnedMeshRenderer joint;
+    private Color baseMesh;
+    private Color baseJoint;
     public GameObject fire;
     public float fireDuration;
     public float infernoDuration;
     Transform opp;
+    public int isTouched = 0;
 
     void Start()
     {
         //lifeText.text = lifePoints.ToString();
         opp = gameObject.transform;
+        baseMesh = mesh.material.color;
+        baseJoint = joint.material.color;
     }
 
-    void OnCollisionEnter(Collision collision)
+    void Update()
     {
-        if (collision.gameObject.GetComponent<FirePower>())
+        if (isTouched != 0)
         {
-            gameObject.transform.GetChild(1).GetComponent<SkinnedMeshRenderer>().material.color = Color.red;
-            //StartCoroutine(Hurt(1, fireDuration));
+            mesh.material.color = Color.red;
+            joint.material.color = Color.red;
+
+            if (isTouched == 1)
+                StartCoroutine(Hurt(2, fireDuration));
+
+            isTouched = 0;
         }
+
+        // if (Input.GetKeyDown(KeyCode.Keypad7))
+        //     DoFire();
     }
 
     void OnTriggerEnter(Collider collision)
@@ -39,19 +54,15 @@ public class Opponent : MonoBehaviour
         {
             health--;
             duration--;
+            Debug.Log("health : " + health + " - duration : " + duration);
             yield return new WaitForSeconds(1);
         }
 
-        gameObject.transform.GetChild(1).GetComponent<SkinnedMeshRenderer>().material.color = Color.black;
+        mesh.material.color = baseMesh;
+        joint.material.color = baseJoint;
         StopCoroutine(Hurt(0, 0));
     }
 
-
-    void Update()
-    {
-        if (Input.GetKeyDown(KeyCode.Keypad7))
-            DoFire();
-    }
     void DoFire()
     {
         Quaternion rotation = Quaternion.LookRotation(-opp.forward, Vector3.up);
@@ -67,4 +78,8 @@ public class Opponent : MonoBehaviour
         fireInstance.GetComponent<Collider>().enabled = true;
     }
 
+    public void setIsTouched(int value)
+    {
+        isTouched = value;
+    }
 }

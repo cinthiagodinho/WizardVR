@@ -24,6 +24,9 @@ public class FirePower : MonoBehaviour
 
     void OnCollisionEnter(Collision collision)
     {
+        if (collision.gameObject.tag == "Enemy")
+            collision.gameObject.GetComponentInParent<Opponent>().setIsTouched(1);
+
         if (!deathBegan)
             StartCoroutine(DestroySelf(collision));
     }
@@ -32,9 +35,6 @@ public class FirePower : MonoBehaviour
     {
         deathBegan = true;
         GameObject explosion = GameObject.Instantiate(fireExplosion, collision.contacts[0].point, Quaternion.identity);
-        //Rigidbody rb = collision.gameObject.GetComponent<Rigidbody>();
-        //rb.AddExplosionForce(explosion.GetComponent<FirePowerExplosion>().getExplosionForce(), transform.position, explosion.GetComponent<FirePowerExplosion>().getExplosionSize());
-        //Debug.Log(rb);
         yield return new WaitForSeconds(timeTillDeath);
         Destroy(gameObject);
     }
