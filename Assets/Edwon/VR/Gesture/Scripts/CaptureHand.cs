@@ -181,7 +181,7 @@ namespace Edwon.VR.Gesture
 
         void CapturePoint()
         {
-            Vector3 rightHandPoint = playerHand.position + (playerHand.transform.forward * 3);
+            Vector3 rightHandPoint = playerHand.position + (playerHand.transform.forward * 0.4F);
             Vector3 localizedPoint = getLocalizedPoint(rightHandPoint);
             currentCapturedLine.Add(localizedPoint);
             if (ContinueCaptureEvent != null)

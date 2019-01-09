@@ -43,7 +43,7 @@ public class Opponent : MonoBehaviour
 
     void OnTriggerEnter(Collider collision)
     {
-        if (collision.gameObject.GetComponent<ZoneAttackSpell>())
+        if (collision.gameObject.GetComponent<AreaSpell>())
             StartCoroutine(Hurt(3, infernoDuration));
     }
 

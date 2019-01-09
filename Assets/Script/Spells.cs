@@ -62,8 +62,8 @@ public class Spells : MonoBehaviour
             case "FireBall":
                 DoFire();
                 break;
-            case "areaSpell":
-                DoareaSpell();
+            case "Inferno":
+                DoAreaSpell();
                 break;
             case "EnergyShield":
                 DoShield();
@@ -81,7 +81,7 @@ public class Spells : MonoBehaviour
             DoShield();
 
         if (Input.GetKeyDown(KeyCode.E) && !areaSpelllaunched)
-            DoareaSpell();
+            DoAreaSpell();
 
         if (Input.GetKeyDown(KeyCode.R))
         {
@@ -90,7 +90,7 @@ public class Spells : MonoBehaviour
                 target = null;
                 DoTelekinesis();
             }
-        }       
+        }
     }
     void FixedUpdate()
     {
@@ -136,7 +136,7 @@ public class Spells : MonoBehaviour
         shieldInstance.GetComponent<Collider>().enabled = true;
     }
 
-    void DoareaSpell()
+    void DoAreaSpell()
     {
         areaSpelllaunched = true;
         /*GameObject areaSpellInstance = GameObject.Instantiate(areaSpell, playerHead.transform.position + (playerHead.transform.forward * 3), areaSpell.transform.rotation);
@@ -158,15 +158,15 @@ public class Spells : MonoBehaviour
         Vector3 fwd = playerHandR.transform.TransformDirection(Vector3.forward);
         //int layerMask = 1 << 8;
         //Debug.Log("do telekinesis");
-        if (Physics.Raycast(playerHandR.transform.position, fwd, out hit, 15))
+        if (Physics.Raycast(playerHandR.transform.position, fwd, out hit, 30))
         {
             if (hit.transform.gameObject.tag == "Interactable")
             {
                 telekinesisOn = true;
                 target = hit.transform.gameObject;
                 target.transform.parent = playerHandR.transform;
-                this.GetComponent<MeshRenderer>().material.color = Color.blue;
-                this.GetComponent<Rigidbody>().isKinematic = true;
+                target.GetComponent<MeshRenderer>().material.color = Color.blue;
+                target.GetComponent<Rigidbody>().isKinematic = true;
                 //Debug.Log(target);
             }
         }
@@ -174,10 +174,10 @@ public class Spells : MonoBehaviour
 
     void StopTelekinesis(GameObject go)
     {
+        go.transform.parent = null;
         go.GetComponent<Rigidbody>().isKinematic = false;
         go.GetComponent<MeshRenderer>().material.color = Color.red;
-        go.transform.parent = null;
-        go.GetComponent<Rigidbody>().AddForce(3, 3, 3);        
+        //go.transform.GetComponent<Rigidbody>().AddRelativeForce(Vector3.forward * 1000);       
         telekinesisOn = false;
         target = null;
         //Debug.Log("stop telekinesis");

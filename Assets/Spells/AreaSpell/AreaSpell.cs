@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ZoneAttackSpell : MonoBehaviour
+public class AreaSpell : MonoBehaviour
 {
     Rigidbody rb;
     public float timeTillDeath;
