@@ -11,6 +11,8 @@ public class Spells : MonoBehaviour
     public GameObject fire;
     public GameObject shield;
     public GameObject areaSpell;
+    public GameObject popCube;
+    private float timeTillCubeDisappear = 2;
 
     //For testing without VR
     private bool shieldlaunched = false;
@@ -77,10 +79,10 @@ public class Spells : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.A))
             DoFire();
 
-        if (Input.GetKeyDown(KeyCode.Z) && !shieldlaunched)
+        if (Input.GetKeyDown(KeyCode.Z))
             DoShield();
 
-        if (Input.GetKeyDown(KeyCode.E) && !areaSpelllaunched)
+        if (Input.GetKeyDown(KeyCode.E))
             DoAreaSpell();
 
         if (Input.GetKeyDown(KeyCode.R))
@@ -121,9 +123,9 @@ public class Spells : MonoBehaviour
 
     void DoShield()
     {
-        shieldlaunched = true;
+        //shieldlaunched = true;
         GameObject shieldInstance = GameObject.Instantiate(shield, playerHandR.transform);
-        shieldInstance.transform.localPosition = new Vector3(0.2f, 0, 2);
+        shieldInstance.transform.localPosition = new Vector3(0.2f, 0, 0.4f);
         shieldInstance.transform.localEulerAngles = new Vector3(0, 90, 0);
         shieldInstance.transform.parent = null;
 
@@ -138,7 +140,7 @@ public class Spells : MonoBehaviour
 
     void DoAreaSpell()
     {
-        areaSpelllaunched = true;
+        //areaSpelllaunched = true;
         /*GameObject areaSpellInstance = GameObject.Instantiate(areaSpell, playerHead.transform.position + (playerHead.transform.forward * 3), areaSpell.transform.rotation);
      */
         GameObject areaSpellInstance = GameObject.Instantiate(areaSpell, playerHandR.transform.position + (playerHandR.transform.forward * 3), areaSpell.transform.rotation);
@@ -181,5 +183,15 @@ public class Spells : MonoBehaviour
         telekinesisOn = false;
         target = null;
         //Debug.Log("stop telekinesis");
+    }
+
+    void PopCube(){
+        GameObject cube = GameObject.Instantiate(popCube);
+        StartCoroutine(WaitAndDestroy(timeTillCubeDisappear, cube));
+    }
+
+    IEnumerator WaitAndDestroy(float value, GameObject go){
+        yield return new WaitForSeconds(timeTillCubeDisappear);
+        Destroy(go);
     }
 }
