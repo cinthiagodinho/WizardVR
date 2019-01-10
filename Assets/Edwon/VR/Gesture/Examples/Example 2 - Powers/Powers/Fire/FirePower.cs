@@ -32,7 +32,7 @@ public class FirePower : MonoBehaviour
 
                 if (collision.gameObject.GetComponent<Target>())
                     collision.gameObject.GetComponent<Target>().setIsTouched(1);
-                    
+
                 StartCoroutine(DestroySelf(collision));
             }
 
@@ -42,6 +42,10 @@ public class FirePower : MonoBehaviour
                 {
                     StartCoroutine(DestroySelf(collision));
                 }
+            }
+            else
+            {
+                StartCoroutine(DestroySelf(collision));
             }
         }
 
