@@ -16,7 +16,7 @@ public class Spells : MonoBehaviour
 
     //For testing without VR
     public static bool shieldlaunched = false;
-    private bool areaSpelllaunched = false;
+    public static bool areaSpelllaunched = false;
 
     public static bool telekinesisOn = false;
     VRGestureRig rig;
@@ -65,11 +65,12 @@ public class Spells : MonoBehaviour
                 DoFire();
                 break;
             case "Inferno":
-                if (!shieldlaunched)
+                if (!areaSpelllaunched)
                     DoAreaSpell();
                 break;
             case "EnergyShield":
-                DoShield();
+                if (!shieldlaunched)
+                    DoShield();
                 break;
         }
     }
@@ -87,7 +88,10 @@ public class Spells : MonoBehaviour
         }
 
         if (Input.GetKeyDown(KeyCode.E))
-            DoAreaSpell();
+        {
+            if (!areaSpelllaunched)
+                DoAreaSpell();
+        }
 
         if (Input.GetKeyDown(KeyCode.R))
         {
@@ -100,7 +104,7 @@ public class Spells : MonoBehaviour
     }
     void FixedUpdate()
     {
-        if (OVRInput.Get(OVRInput.Axis1D.SecondaryHandTrigger, OVRInput.Controller.Touch) > 0)
+        if (OVRInput.Get(OVRInput.Axis1D.PrimaryHandTrigger, OVRInput.Controller.Touch) > 0)
         {
             if (!telekinesisOn && target == null)
                 DoTelekinesis();
@@ -109,6 +113,15 @@ public class Spells : MonoBehaviour
         {
             if (telekinesisOn && target != null)
                 StopTelekinesis(target);
+        }
+
+        if (telekinesisOn)
+        {
+            if (playerHandR.transform.rotation.z > 0)
+                target.transform.position += new Vector3(0, 0, 0.01f);
+
+            if (playerHandR.transform.rotation.z < 0)
+                target.transform.position -= new Vector3(0, 0, 0.01f);
         }
     }
 
@@ -131,23 +144,14 @@ public class Spells : MonoBehaviour
         GameObject shieldInstance = GameObject.Instantiate(shield, playerHandR.transform);
         shieldInstance.transform.localPosition = new Vector3(0.2f, 0, 0.4f);
         shieldInstance.transform.localEulerAngles = new Vector3(0, 90, 0);
-        shieldInstance.transform.parent = null;     
-    }    
+        shieldInstance.transform.parent = null;
+    }
 
     void DoAreaSpell()
     {
-        //areaSpelllaunched = true;
-        /*GameObject areaSpellInstance = GameObject.Instantiate(areaSpell, playerHead.transform.position + (playerHead.transform.forward * 3), areaSpell.transform.rotation);
-     */
+        areaSpelllaunched = true;
         GameObject areaSpellInstance = GameObject.Instantiate(areaSpell, playerHandR.transform.position + (playerHandR.transform.forward * 3), areaSpell.transform.rotation);
         areaSpellInstance.transform.position = new Vector3(areaSpellInstance.transform.position.x, -2.50f, areaSpellInstance.transform.position.z);
-        StartCoroutine(IEDoareaSpell(areaSpellInstance));
-    }
-
-    IEnumerator IEDoareaSpell(GameObject areaSpellInstance)
-    {
-        yield return new WaitForSeconds(.1f);
-        areaSpellInstance.GetComponent<Collider>().enabled = true;
     }
 
     void DoTelekinesis()
@@ -155,7 +159,7 @@ public class Spells : MonoBehaviour
         RaycastHit hit;
         Vector3 fwd = playerHandR.transform.TransformDirection(Vector3.forward);
         //int layerMask = 1 << 8;
-        //Debug.Log("do telekinesis");
+
         if (Physics.Raycast(playerHandR.transform.position, fwd, out hit, 30))
         {
             if (hit.transform.gameObject.tag == "Interactable")
@@ -165,7 +169,6 @@ public class Spells : MonoBehaviour
                 target.transform.parent = playerHandR.transform;
                 target.GetComponent<MeshRenderer>().material.color = Color.blue;
                 target.GetComponent<Rigidbody>().isKinematic = true;
-                //Debug.Log(target);
             }
         }
     }
@@ -175,10 +178,11 @@ public class Spells : MonoBehaviour
         go.transform.parent = null;
         go.GetComponent<Rigidbody>().isKinematic = false;
         go.GetComponent<MeshRenderer>().material.color = Color.red;
-        //go.transform.GetComponent<Rigidbody>().AddRelativeForce(Vector3.forward * 1000);       
         telekinesisOn = false;
+        go.transform.GetComponent<Rigidbody>().velocity = playerHandR.GetComponent<Rigidbody>().velocity * 2.0f;
+        go.transform.GetComponent<Rigidbody>().angularVelocity = playerHandR.GetComponent<Rigidbody>().angularVelocity; //à tester
         target = null;
-        //Debug.Log("stop telekinesis");
+
     }
 
     void PopCube()

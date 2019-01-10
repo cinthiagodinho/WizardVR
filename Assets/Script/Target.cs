@@ -21,8 +21,8 @@ public class Target : MonoBehaviour
         if (isTouched != 0)
         {
             int damages = 0;
-            int duration = 0;
-            int intervalle = 0;
+            float duration = 0;
+            float intervalle = 0;
 
             if (isTouched == 1)
             {
@@ -36,18 +36,10 @@ public class Target : MonoBehaviour
         }
     }
 
-    void OnCollisionEnter(Collision col)
-    {
-        if (col.gameObject.GetComponentInChildren<FirePower>())
-        {
-
-        }
-    }
-
-    IEnumerator Hurt(int damage, int duration, int intervalle = 0)
+    IEnumerator Hurt(int damage, float duration, float intervalle = 0)
     {
         int count = 0;
-       
+
         while (duration > 0)
         {
             if (intervalle == 1)

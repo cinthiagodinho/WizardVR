@@ -157,7 +157,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9deeb26d391b73a42af19c6a98148fe5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  timeTillDeath: 3
+  timeTillDeath: 7.5
   delayTillExplosion: 2
   damages: {fileID: 1579487594350256}
 --- !u!198 &198446081976155638
