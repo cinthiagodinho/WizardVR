@@ -7,7 +7,6 @@ public class FirePower : MonoBehaviour
     Rigidbody rb;
     public float timeTillDeath;
     private bool deathBegan = false;
-
     public GameObject fireExplosion;
 
     void Start()
@@ -24,11 +23,28 @@ public class FirePower : MonoBehaviour
 
     void OnCollisionEnter(Collision collision)
     {
-        if (collision.gameObject.tag == "Enemy")
-            collision.gameObject.GetComponentInParent<Opponent>().setIsTouched(1);
-
         if (!deathBegan)
-            StartCoroutine(DestroySelf(collision));
+        {
+            if (collision.gameObject.tag == "Enemy")
+            {
+                if (collision.gameObject.GetComponentInParent<Opponent>())
+                    collision.gameObject.GetComponentInParent<Opponent>().setIsTouched(1);
+
+                if (collision.gameObject.GetComponent<Target>())
+                    collision.gameObject.GetComponent<Target>().setIsTouched(1);
+                    
+                StartCoroutine(DestroySelf(collision));
+            }
+
+            if (collision.gameObject.GetComponent<ShieldSpell>())
+            {
+                if (collision.gameObject.GetComponent<ShieldSpell>().getTimer() > collision.gameObject.GetComponent<ShieldSpell>().getCriticalParade())
+                {
+                    StartCoroutine(DestroySelf(collision));
+                }
+            }
+        }
+
     }
 
     IEnumerator DestroySelf(Collision collision)

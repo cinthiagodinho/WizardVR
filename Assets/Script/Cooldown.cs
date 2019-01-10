@@ -5,7 +5,6 @@ using UnityEngine.UI;
 
 public class Cooldown : MonoBehaviour
 {
-
     public float shieldCooldown;
     private float _shieldCooldown;
     public Text shieldTextCooldown;
@@ -22,8 +21,7 @@ public class Cooldown : MonoBehaviour
             yield return new WaitForSeconds(1f);
         }
         shieldTextCooldown.text = "";
-        shieldCooldown = _shieldCooldown;
-        //shieldlaunched = false;
+        shieldCooldown = _shieldCooldown;      
     }
 
     IEnumerator ZoneAttackCooldown()
@@ -35,7 +33,6 @@ public class Cooldown : MonoBehaviour
             yield return new WaitForSeconds(1f);
         }
         zoneAttackTextCooldown.text = "";
-        zoneAttackCooldown = _shieldCooldown;
-        //zoneAttacklaunched = false;
+        zoneAttackCooldown = _shieldCooldown; 
     }
 }
