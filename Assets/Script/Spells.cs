@@ -27,7 +27,7 @@ public class Spells : MonoBehaviour
     Transform playerHandR;
 
     private GameObject target;
-
+  
     void Start()
     {
         rig = FindObjectOfType<VRGestureRig>();
@@ -91,40 +91,9 @@ public class Spells : MonoBehaviour
         {
             if (!areaSpelllaunched)
                 DoAreaSpell();
-        }
-
-        if (Input.GetKeyDown(KeyCode.R))
-        {
-            if (!telekinesisOn)
-            {
-                target = null;
-                DoTelekinesis();
-            }
-        }
+        }        
     }
-    void FixedUpdate()
-    {
-        if (OVRInput.Get(OVRInput.Axis1D.PrimaryHandTrigger, OVRInput.Controller.Touch) > 0)
-        {
-            if (!telekinesisOn && target == null)
-                DoTelekinesis();
-        }
-        else
-        {
-            if (telekinesisOn && target != null)
-                StopTelekinesis(target);
-        }
-
-        if (telekinesisOn)
-        {
-            if (playerHandR.transform.rotation.z > 0)
-                target.transform.position += new Vector3(0, 0, 0.01f);
-
-            if (playerHandR.transform.rotation.z < 0)
-                target.transform.position -= new Vector3(0, 0, 0.01f);
-        }
-    }
-
+    
     void DoFire()
     {
         GameObject fireInstance = GameObject.Instantiate(fire, playerHandR.position, playerHandR.rotation);
@@ -152,37 +121,6 @@ public class Spells : MonoBehaviour
         areaSpelllaunched = true;
         GameObject areaSpellInstance = GameObject.Instantiate(areaSpell, playerHandR.transform.position + (playerHandR.transform.forward * 3), areaSpell.transform.rotation);
         areaSpellInstance.transform.position = new Vector3(areaSpellInstance.transform.position.x, -2.50f, areaSpellInstance.transform.position.z);
-    }
-
-    void DoTelekinesis()
-    {
-        RaycastHit hit;
-        Vector3 fwd = playerHandR.transform.TransformDirection(Vector3.forward);
-        //int layerMask = 1 << 8;
-
-        if (Physics.Raycast(playerHandR.transform.position, fwd, out hit, 30))
-        {
-            if (hit.transform.gameObject.tag == "Interactable")
-            {
-                telekinesisOn = true;
-                target = hit.transform.gameObject;
-                target.transform.parent = playerHandR.transform;
-                target.GetComponent<MeshRenderer>().material.color = Color.blue;
-                target.GetComponent<Rigidbody>().isKinematic = true;
-            }
-        }
-    }
-
-    void StopTelekinesis(GameObject go)
-    {
-        go.transform.parent = null;
-        go.GetComponent<Rigidbody>().isKinematic = false;
-        go.GetComponent<MeshRenderer>().material.color = Color.red;
-        telekinesisOn = false;
-        go.transform.GetComponent<Rigidbody>().velocity = playerHandR.GetComponent<Rigidbody>().velocity * 2.0f;
-        go.transform.GetComponent<Rigidbody>().angularVelocity = playerHandR.GetComponent<Rigidbody>().angularVelocity; //à tester
-        target = null;
-
     }
 
     void PopCube()
