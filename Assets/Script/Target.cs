@@ -30,42 +30,72 @@ public class Target : MonoBehaviour
                 damages = gameController.GetComponent<SpellsData>().getFireDamages();
                 duration = gameController.GetComponent<SpellsData>().getFireDuration();
                 intervalle = gameController.GetComponent<SpellsData>().getFireIntervalle();
+                StartCoroutine(HurtFire(damages, duration, intervalle));
             }
-            StartCoroutine(Hurt(damages, duration, intervalle));
+            else if (isTouched == 2)
+            {
+                float limit = 0;
+
+                mesh.material.color = Color.red;
+                damages = gameController.GetComponent<SpellsData>().getAreaSpellDamages();
+                duration = gameController.GetComponent<SpellsData>().getAreaSpellDuration();
+                intervalle = gameController.GetComponent<SpellsData>().getAreaSpellIntervalle();
+                limit = gameController.GetComponent<SpellsData>().getAreaSpellLimit();
+                StartCoroutine(HurtAreaSpell(damages, duration, intervalle, limit));
+            }
+
             isTouched = 0;
         }
+        if (health <= 0)
+            Destroy(gameObject);
     }
-
-    IEnumerator Hurt(int damage, float duration, float intervalle = 0)
+    IEnumerator HurtFire(int damage, float duration, float intervalle)
     {
         int count = 0;
 
         while (duration > 0)
         {
-            if (intervalle == 1)
+            duration--;
+            count++;
+
+            if (count == intervalle)
             {
                 health -= damage;
-                duration--;
-            }
-
-            if (intervalle > 1)
-            {
-                duration--;
-                count++;
-
-                if (count == intervalle)
-                {
-                    health -= damage;
-                    count = 0;
-                }
+                count = 0;
             }
             yield return new WaitForSeconds(1);
         }
 
         mesh.material.color = baseMesh;
         Debug.Log("Health : " + health);
-        StopCoroutine(Hurt(0, 0, 0));
+        StopCoroutine(HurtFire(0, 0, 0));
     }
+
+    IEnumerator HurtAreaSpell(int damage, float duration, float intervalle, float limit)
+    {
+        int count = 0;
+
+        while (duration > 0)
+        {
+            duration--;
+            count++;
+
+            if (count == intervalle)
+            {
+                if (duration <= limit)
+                    damage--;
+
+                health -= damage;
+                count = 0;
+            }
+            yield return new WaitForSeconds(1);
+        }
+
+        mesh.material.color = baseMesh;
+        Debug.Log("Health : " + health);
+        StopCoroutine(HurtAreaSpell(0, 0, 0, 0));
+    }
+
     public void setIsTouched(int value)
     {
         isTouched = value;

@@ -11,17 +11,16 @@ public class Telekinesis : MonoBehaviour
     public OVRInput.Controller controller;
     public string buttonName;
     VRGestureRig rig;
-    IInput input;
-    Transform playerHead;
+    IInput input;    
     Transform playerHandL;
-    Transform playerHandR;
-
+  
     //Variables for telekinesis
     private GameObject grabbedObject;
     private bool telekinesisOn = false;
     Vector3 controllerVelocity;
     Quaternion lastRotation;
     Quaternion currentRotation;
+    public float speed;
     private Color baseMeshColor;
 
     //Debug Line
@@ -44,25 +43,26 @@ public class Telekinesis : MonoBehaviour
         {
             Debug.Log("there is no VRGestureRig in the scene, please add one");
         }
-
-        playerHead = rig.head;
-        playerHandR = rig.handRight;
+         
         playerHandL = rig.handLeft;
 
         input = rig.GetInput(rig.mainHand);
     }
     void Update()
     {
+        //For testing
         Ray pointer = new Ray(playerHandL.position, playerHandL.forward);
 
         if (lineRenderer != null)
         {
             lineRenderer.SetPosition(0, pointer.origin);
-            lineRenderer.SetPosition(1, pointer.origin + pointer.direction * 500.0f);
+            lineRenderer.SetPosition(1, pointer.origin + pointer.direction * 30);
         }
+        //
 
         RaycastHit hit;
-        if (Physics.Raycast(pointer, out hit, 500.0f))
+
+        if (Physics.Raycast(pointer, out hit, 30))
         {
             if (lineRenderer != null)
             {
@@ -70,10 +70,9 @@ public class Telekinesis : MonoBehaviour
             }
         }
 
-        if (!telekinesisOn && Input.GetAxis(buttonName) == 1)
-        {
+        if (!telekinesisOn && Input.GetAxis(buttonName) == 1)        
             GrabObject();
-        }
+        
         else if (telekinesisOn && Input.GetAxis(buttonName) < 1)
         {
             DropObject();
@@ -86,12 +85,15 @@ public class Telekinesis : MonoBehaviour
             currentRotation = grabbedObject.transform.rotation;
 
             if (playerHandL.transform.localRotation.z > 0.30f)
-                grabbedObject.transform.position += new Vector3(0, 0, 0.02f);
+                grabbedObject.transform.position += new Vector3(0, 0, speed);
 
-            if (playerHandL.transform.localRotation.z < -0.30f)
-                grabbedObject.transform.position -= new Vector3(0, 0, 0.02f);
+            else if (playerHandL.transform.localRotation.z < -0.30f)
+                grabbedObject.transform.position -= new Vector3(0, 0, speed);
+
+            else if(playerHandL.transform.localRotation.z == 0){              
+                grabbedObject.transform.position = Vector3.MoveTowards(grabbedObject.transform.position, playerHandL.transform.position+ (playerHandL.transform.forward * 3), 2 * Time.deltaTime);
+            }           
         }
-
     }
 
     void GrabObject()
@@ -112,7 +114,6 @@ public class Telekinesis : MonoBehaviour
                 grabbedObject.GetComponent<Rigidbody>().isKinematic = true;
             }
         }
-
     }
 
     void DropObject()

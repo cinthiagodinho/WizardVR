@@ -41,6 +41,8 @@ GameObject:
   - component: {fileID: 4736691924862894}
   - component: {fileID: 198446081976155638}
   - component: {fileID: 199046394484747114}
+  - component: {fileID: 136571722468304722}
+  - component: {fileID: 114943771404224460}
   m_Layer: 0
   m_Name: Particle System
   m_TagString: Untagged
@@ -55,7 +57,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1017700590560932}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: -1.69, z: 0}
+  m_LocalPosition: {x: 25.52, y: -2.56, z: -7.76}
   m_LocalScale: {x: 3, y: 0.1, z: 3}
   m_Children:
   - {fileID: 4736691924862894}
@@ -69,7 +71,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1579487594350256}
   m_LocalRotation: {x: -0.7071068, y: 0, z: 0, w: 0.7071068}
-  m_LocalPosition: {x: 0.12233337, y: 9.92, z: 0.12966666}
+  m_LocalPosition: {x: 0, y: 1.81, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 4405265533138944}
@@ -90,7 +92,7 @@ MeshRenderer:
   m_ReflectionProbeUsage: 1
   m_RenderingLayerMask: 4294967295
   m_Materials:
-  - {fileID: 2100000, guid: 725d7b8206bcd3b458b6675ae698f2c4, type: 2}
+  - {fileID: 2100000, guid: 941a2f785c921af4fbdbb9b7c22de9e8, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -157,9 +159,37 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9deeb26d391b73a42af19c6a98148fe5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  controller: 2
+  buttonName: RHandTrigger
   timeTillDeath: 7.5
-  delayTillExplosion: 2
   damages: {fileID: 1579487594350256}
+  matInProgress: {fileID: 2100000, guid: 941a2f785c921af4fbdbb9b7c22de9e8, type: 2}
+  matValidated: {fileID: 2100000, guid: 725d7b8206bcd3b458b6675ae698f2c4, type: 2}
+  speed: 0.05
+--- !u!114 &114943771404224460
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1579487594350256}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7fa5d1121c0c24746994865957f8dfd1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!136 &136571722468304722
+CapsuleCollider:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1579487594350256}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  m_Radius: 0.5
+  m_Height: 77
+  m_Direction: 2
+  m_Center: {x: 0, y: 0, z: 26.5}
 --- !u!198 &198446081976155638
 ParticleSystem:
   m_ObjectHideFlags: 1
@@ -167,7 +197,7 @@ ParticleSystem:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1579487594350256}
   serializedVersion: 5
-  lengthInSec: 2
+  lengthInSec: 7.5
   simulationSpeed: 1
   stopAction: 0
   looping: 0
@@ -3562,12 +3592,12 @@ ParticleSystem:
   CollisionModule:
     enabled: 0
     serializedVersion: 3
-    type: 0
+    type: 1
     collisionMode: 0
     colliderForce: 0
     multiplyColliderForceByParticleSize: 0
     multiplyColliderForceByParticleSpeed: 0
-    multiplyColliderForceByCollisionAngle: 1
+    multiplyColliderForceByCollisionAngle: 0
     plane0: {fileID: 0}
     plane1: {fileID: 0}
     plane2: {fileID: 0}
@@ -3630,7 +3660,7 @@ ParticleSystem:
     m_Bounce:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 1
+      scalar: 0
       minScalar: 1
       maxCurve:
         serializedVersion: 2
@@ -3734,15 +3764,15 @@ ParticleSystem:
         m_PostInfinity: 2
         m_RotationOrder: 4
     minKillSpeed: 0
-    maxKillSpeed: 10000
+    maxKillSpeed: 0
     radiusScale: 1
     collidesWith:
       serializedVersion: 2
-      m_Bits: 4294967295
+      m_Bits: 1
     maxCollisionShapes: 256
     quality: 0
     voxelSize: 0.5
-    collisionMessages: 0
+    collisionMessages: 1
     collidesWithDynamic: 1
     interiorCollisions: 0
   TriggerModule:
@@ -3753,9 +3783,9 @@ ParticleSystem:
     collisionShape3: {fileID: 0}
     collisionShape4: {fileID: 0}
     collisionShape5: {fileID: 0}
-    inside: 1
+    inside: 0
     outside: 0
-    enter: 0
+    enter: 2
     exit: 0
     radiusScale: 1
   SubModule:

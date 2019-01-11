@@ -93,7 +93,7 @@ public class Spells : MonoBehaviour
                 DoAreaSpell();
         }        
     }
-    
+
     void DoFire()
     {
         GameObject fireInstance = GameObject.Instantiate(fire, playerHandR.position, playerHandR.rotation);
@@ -120,7 +120,7 @@ public class Spells : MonoBehaviour
     {
         areaSpelllaunched = true;
         GameObject areaSpellInstance = GameObject.Instantiate(areaSpell, playerHandR.transform.position + (playerHandR.transform.forward * 3), areaSpell.transform.rotation);
-        areaSpellInstance.transform.position = new Vector3(areaSpellInstance.transform.position.x, -2.50f, areaSpellInstance.transform.position.z);
+        areaSpellInstance.transform.parent = playerHandR.transform;
     }
 
     void PopCube()

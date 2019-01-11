@@ -39,24 +39,24 @@ public class Opponent : MonoBehaviour
                 damages = gameController.GetComponent<SpellsData>().getFireDamages();
                 duration = gameController.GetComponent<SpellsData>().getFireDuration();
                 intervalle = gameController.GetComponent<SpellsData>().getFireIntervalle();
+                StartCoroutine(HurtFire(damages, duration, intervalle));
             }
-            StartCoroutine(HurtFire(damages, duration, intervalle));
+            else if (isTouched == 2)
+            {
+                float limit = 0;
+
+                mesh.material.color = Color.red;
+                damages = gameController.GetComponent<SpellsData>().getAreaSpellDamages();
+                duration = gameController.GetComponent<SpellsData>().getAreaSpellDuration();
+                intervalle = gameController.GetComponent<SpellsData>().getAreaSpellIntervalle();
+                limit = gameController.GetComponent<SpellsData>().getAreaSpellLimit();
+                StartCoroutine(HurtAreaSpell(damages, duration, intervalle, limit));
+            }
             isTouched = 0;
         }
-    }
 
-    void OnTriggerEnter(Collider collision)
-    {
-        if (collision.gameObject.GetComponent<AreaSpell>())
-        {
-            mesh.material.color = Color.red;
-            int damages = gameController.GetComponent<SpellsData>().getAreaSpellDamages();
-            float duration = gameController.GetComponent<SpellsData>().getAreaSpellDuration();
-            float intervalle = gameController.GetComponent<SpellsData>().getAreaSpellIntervalle();
-            float limit = gameController.GetComponent<SpellsData>().getAreaSpellLimit();
-            StartCoroutine(HurtAreaSpell(damages, duration, intervalle, limit));
-
-        }
+        if(health <= 0)
+            Destroy(gameObject);
     }
 
     IEnumerator HurtFire(int damage, float duration, float intervalle)
