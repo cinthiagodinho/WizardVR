@@ -165,7 +165,7 @@ MonoBehaviour:
   damages: {fileID: 1579487594350256}
   matInProgress: {fileID: 2100000, guid: 941a2f785c921af4fbdbb9b7c22de9e8, type: 2}
   matValidated: {fileID: 2100000, guid: 725d7b8206bcd3b458b6675ae698f2c4, type: 2}
-  speed: 0.05
+  speed: 0.03
 --- !u!114 &114943771404224460
 MonoBehaviour:
   m_ObjectHideFlags: 1
