@@ -4,58 +4,71 @@ using UnityEngine;
 
 public class Move : MonoBehaviour
 {
-    // Transforms to act as start and end markers for the journey.
-    public Vector3 startMarker;
-    public Vector3 endMarker;
+    private Transform player;
 
-    // Movement speed in units/sec.
-    public float speed = 1.0F;
 
-    // Time when the movement started.
+    public Transform startMarker;
+    public Transform endMarker;
+    public float speed;
     private float startTime;
-
-    // Total distance between the markers.
     private float journeyLength;
-    private float distCovered = 0;
-    private float fracJourney = 0;
-    private int way = 1;
+    private bool finishedMove = false;
+    private int direction;
 
     void Start()
     {
+        player = GameObject.FindGameObjectWithTag("Player").transform;
         startTime = Time.time;
-        startMarker = gameObject.transform.position;
-        endMarker = new Vector3(gameObject.transform.position.x + 3, gameObject.transform.position.y, gameObject.transform.position.z);
-        journeyLength = Vector3.Distance(startMarker, endMarker);
-        distCovered = (Time.time - startTime) * speed;
-        fracJourney = distCovered / journeyLength;
+        journeyLength = Vector3.Distance(startMarker.position, endMarker.position);
+        direction = 1; // 0 means to the left, 1 means to the right
     }
 
     void Update()
     {
-        distCovered = (Time.time - startTime) * speed;
-        fracJourney = distCovered / journeyLength;
+        //Aim the player
+        transform.LookAt(player);
 
-        if (way == 1)
-            StartCoroutine(MoveToTheRight(fracJourney));
-        else if (way == 2)
+        if (!finishedMove)
         {
-            StartCoroutine(MoveToTheLeft(fracJourney));
+            //For smoothing moves to the two positions
+            float distCovered = (Time.time - startTime) * speed;
+            float fracJourney = distCovered / journeyLength;
+
+            if (direction == 0)
+            {
+                transform.position = Vector3.Lerp(startMarker.position, endMarker.position, fracJourney);
+                //Target has finished to go on the left
+                if (transform.position == endMarker.position)
+                    finishedMove = true;
+            }
+            else if (direction == 1)
+            {
+                transform.position = Vector3.Lerp(endMarker.position, startMarker.position, fracJourney);
+                //Target has finished to go on the right
+                if (transform.position == startMarker.position)
+                    finishedMove = true;
+            }
+        }
+
+        if (finishedMove)
+        {
+            if (transform.position == endMarker.position)
+            {
+                direction = 1;
+            }
+            else if (transform.position == startMarker.position)
+            {
+                direction = 0;
+            }
+            StartCoroutine(Wait());
         }
     }
 
-    IEnumerator MoveToTheRight(float a)
+    IEnumerator Wait()
     {
-        transform.position = Vector3.Lerp(startMarker, endMarker, a);
-        yield return new WaitForFixedUpdate();
-        StopCoroutine(MoveToTheRight(0));
-        way = 2;
+        yield return new WaitForSeconds(2);
+        finishedMove = false;
+        startTime = Time.time;
     }
 
-    IEnumerator MoveToTheLeft(float a)
-    {
-        transform.position = Vector3.Lerp(endMarker, startMarker, a);
-        yield return new WaitForFixedUpdate();
-        StopCoroutine(MoveToTheLeft(0));
-        way = 1;
-    }
 }

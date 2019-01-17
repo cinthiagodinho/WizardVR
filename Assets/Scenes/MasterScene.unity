@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.44657993, g: 0.49641424, b: 0.57481825, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657898, g: 0.4964133, b: 0.5748178, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -221,7 +221,7 @@ GameObject:
   - component: {fileID: 137830652}
   m_Layer: 0
   m_Name: Player
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -273,7 +273,7 @@ MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 137830651}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: c4b755b9d3a35a1419ac283bfe2bdd2c, type: 3}
   m_Name: 
@@ -1589,14 +1589,14 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 826602462}
-  m_LocalRotation: {x: 0.000016799522, y: 0.9646817, z: -0.26341853, w: 0.0000045873217}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 25.78, y: 2.01, z: -9.02}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 2061564064}
   m_Father: {fileID: 0}
   m_RootOrder: 5
-  m_LocalEulerAnglesHint: {x: 30.546001, y: 180, z: 0.002}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &826602465
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1635,9 +1635,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f1209f3f41a231e4d9f379caedf4b160, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  startMarker: {x: 0, y: 0, z: 0}
-  endMarker: {x: 0, y: 0, z: 0}
-  speed: 3
+  startMarker: {fileID: 4529667208410238, guid: 0df9c1d57f2c2dc409f44066265b0c29,
+    type: 2}
+  endMarker: {fileID: 4434017929893054, guid: 51aa00e52f8bf3e46ac640f864254769, type: 2}
+  speed: 2
 --- !u!1 &833184042 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 1053433419993370, guid: dbc24140a6a1ee6408895d03ca09d8eb,

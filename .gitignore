@@ -34,3 +34,7 @@ sysinfo.txt
 # Builds
 *.apk
 *.unitypackage
+
+Assets/Edwon/VR/Gesture/Examples/
+Assets/Edwon/VR/Gesture/Integrations/
+Assets/Edwon/VR/Gesture/Tutorials/
