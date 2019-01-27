@@ -8,7 +8,7 @@ public class Shoot : MonoBehaviour
     public float startingTime;
 
     void Start(){
-        InvokeRepeating("DoFire", startingTime, 3.0f);
+        InvokeRepeating("DoFire", startingTime, 4f);
     }
     void Update()
     {

@@ -1579,13 +1579,13 @@ MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 826602462}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 46278fb6a700f7f438ce319809c7e56b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   fire: {fileID: 130144, guid: 3a73fd7a773a8894296d6dc633f9c5bf, type: 2}
-  startingTime: 3
+  startingTime: 4
 --- !u!4 &826602464
 Transform:
   m_ObjectHideFlags: 0
