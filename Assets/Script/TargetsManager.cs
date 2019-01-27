@@ -11,7 +11,7 @@ public class TargetsManager : MonoBehaviour {
 	}
 	void Update(){
 		if(Input.GetKeyDown(KeyCode.Keypad1))
-			Destroy(targets[0]);
+			Destroy(targets[0].gameObject);
 
 			if(!targets[0]){
 				targets[1].gameObject.SetActive(true);
