@@ -10,17 +10,16 @@ public class Move : MonoBehaviour
     public Transform startMarker;
     public Transform endMarker;
     public float speed;
-    private float startTime;
-    private float journeyLength;
     private bool finishedMove = false;
-    private int direction;
+    private int direction = 0;
+    public float intervalle;
+    private float journeyLength;
+    private float fracJourney;
 
     void Start()
     {
         player = GameObject.FindGameObjectWithTag("Player").transform;
-        startTime = Time.time;
         journeyLength = Vector3.Distance(startMarker.position, endMarker.position);
-        direction = 1; // 0 means to the left, 1 means to the right
     }
 
     void Update()
@@ -30,45 +29,39 @@ public class Move : MonoBehaviour
 
         if (!finishedMove)
         {
-            //For smoothing moves to the two positions
-            float distCovered = (Time.time - startTime) * speed;
-            float fracJourney = distCovered / journeyLength;
-
             if (direction == 0)
-            {
-                transform.position = Vector3.Lerp(startMarker.position, endMarker.position, fracJourney);
-                //Target has finished to go on the left
-                if (transform.position == endMarker.position)
-                    finishedMove = true;
-            }
+                StartCoroutine(Move_Routine(startMarker.transform.position, endMarker.transform.position));
             else if (direction == 1)
             {
-                transform.position = Vector3.Lerp(endMarker.position, startMarker.position, fracJourney);
-                //Target has finished to go on the right
-                if (transform.position == startMarker.position)
-                    finishedMove = true;
+                StartCoroutine(Move_Routine(endMarker.transform.position, startMarker.transform.position));
             }
         }
+    }
 
-        if (finishedMove)
+    IEnumerator Move_Routine(Vector3 from, Vector3 to)
+    {
+        float startTime = Time.time;
+
+        while (transform.position != to)
         {
-            if (transform.position == endMarker.position)
-            {
-                direction = 1;
-            }
-            else if (transform.position == startMarker.position)
-            {
-                direction = 0;
-            }
-            StartCoroutine(Wait());
+            fracJourney = ((Time.time - startTime) * speed) / journeyLength;
+            transform.position = Vector3.Lerp(from, to, fracJourney);
+            yield return null;
         }
+        if (direction == 0)
+            direction = 1;
+        else if (direction == 1)
+            direction = 0;
+
+        finishedMove = true;
+        StartCoroutine(Wait());
     }
 
     IEnumerator Wait()
     {
-        yield return new WaitForSeconds(2);
+        StopCoroutine(Move_Routine(Vector3.zero, Vector3.zero));
+        yield return new WaitForSeconds(intervalle);      
         finishedMove = false;
-        startTime = Time.time;
+        StopCoroutine(Wait());
     }
-
 }

@@ -5,11 +5,16 @@ using UnityEngine;
 public class Shoot : MonoBehaviour
 {
     public GameObject fire;  
+    public float startingTime;
 
+    void Start(){
+        InvokeRepeating("DoFire", startingTime, 3.0f);
+    }
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.P) || Input.GetButtonDown("Fire2"))
-            DoFire();
+        
+        /*if (Input.GetKeyDown(KeyCode.P) || Input.GetButtonDown("Fire2"))
+            DoFire();*/
     }
     void DoFire()
     {

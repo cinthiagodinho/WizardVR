@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.44657898, g: 0.4964133, b: 0.5748178, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657993, g: 0.49641424, b: 0.57481825, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -266,6 +266,8 @@ MonoBehaviour:
   fire: {fileID: 130144, guid: 3a73fd7a773a8894296d6dc633f9c5bf, type: 2}
   shield: {fileID: 1868405468129700, guid: c376e3f6d6985154c8893fb0aa8d3dda, type: 2}
   areaSpell: {fileID: 1017700590560932, guid: 9cdb8fcb5421356488d8f216e9d81db5, type: 2}
+  thunderbolt: {fileID: 1230345741713986, guid: b36dfd71dea53aa449ca779abab78ab8,
+    type: 2}
   popCube: {fileID: 1907916710905098, guid: ab4fe8c115daf9f4bb78893c02ccc272, type: 2}
 --- !u!114 &137830655
 MonoBehaviour:
@@ -1066,7 +1068,7 @@ GameObject:
   - component: {fileID: 443834509}
   m_Layer: 0
   m_Name: Object
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1577,12 +1579,13 @@ MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 826602462}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 46278fb6a700f7f438ce319809c7e56b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   fire: {fileID: 130144, guid: 3a73fd7a773a8894296d6dc633f9c5bf, type: 2}
+  startingTime: 3
 --- !u!4 &826602464
 Transform:
   m_ObjectHideFlags: 0
@@ -1639,6 +1642,7 @@ MonoBehaviour:
     type: 2}
   endMarker: {fileID: 4434017929893054, guid: 51aa00e52f8bf3e46ac640f864254769, type: 2}
   speed: 2
+  intervalle: 3
 --- !u!1 &833184042 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 1053433419993370, guid: dbc24140a6a1ee6408895d03ca09d8eb,
@@ -2053,7 +2057,7 @@ Prefab:
     m_Modifications:
     - target: {fileID: 491952, guid: 1bca2fedf20fa674f8046c5f3f499732, type: 2}
       propertyPath: m_LocalPosition.x
-      value: 27.417
+      value: 26.27
       objectReference: {fileID: 0}
     - target: {fileID: 491952, guid: 1bca2fedf20fa674f8046c5f3f499732, type: 2}
       propertyPath: m_LocalPosition.y
@@ -2623,6 +2627,7 @@ GameObject:
   - component: {fileID: 1283180954}
   - component: {fileID: 1283180953}
   - component: {fileID: 1283180955}
+  - component: {fileID: 1283180956}
   m_Layer: 0
   m_Name: Game Controller
   m_TagString: GameController
@@ -2676,6 +2681,20 @@ MonoBehaviour:
   areaSpellIntervalle: 1.5
   areaSpellDuration: 7.5
   areaSpellLimit: 3
+--- !u!114 &1283180956
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1283180952}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b4b3070cee31d13429a691d1fac51b0b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  targets:
+  - {fileID: 826602465}
+  - {fileID: 1516376084}
 --- !u!1 &1322523892 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 1104678158970526, guid: dbc24140a6a1ee6408895d03ca09d8eb,
@@ -3056,8 +3075,9 @@ GameObject:
   - component: {fileID: 1516376085}
   - component: {fileID: 1516376084}
   - component: {fileID: 1516376087}
+  - component: {fileID: 1516376088}
   m_Layer: 0
-  m_Name: Target (1)
+  m_Name: Target
   m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3074,7 +3094,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 79008e5991f45d940977455b61e26065, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  health: 10
+  health: 5
   fireDuration: 4
   mesh: {fileID: 443834509}
 --- !u!114 &1516376085
@@ -3089,20 +3109,21 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   fire: {fileID: 130144, guid: 3a73fd7a773a8894296d6dc633f9c5bf, type: 2}
+  startingTime: 3
 --- !u!4 &1516376086
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1516376083}
-  m_LocalRotation: {x: 0.000016799522, y: 0.9646817, z: -0.26341853, w: 0.0000045873217}
-  m_LocalPosition: {x: 28.91, y: 2.01, z: -8.604098}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 27.51, y: -0.52, z: -4.76}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 443834512}
   m_Father: {fileID: 0}
   m_RootOrder: 6
-  m_LocalEulerAnglesHint: {x: 30.546001, y: 180, z: 0.002}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!136 &1516376087
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -3116,6 +3137,22 @@ CapsuleCollider:
   m_Height: 1
   m_Direction: 1
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &1516376088
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1516376083}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f1209f3f41a231e4d9f379caedf4b160, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  startMarker: {fileID: 4616719601091396, guid: 8de39f3a932ceae4898d99a4aab35b1d,
+    type: 2}
+  endMarker: {fileID: 4993263733793978, guid: bf48e2d172b18f3409c2cdd611e11d75, type: 2}
+  speed: 2
+  intervalle: 0
 --- !u!1 &1609379298 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 1983881343883774, guid: dbc24140a6a1ee6408895d03ca09d8eb,
@@ -3480,7 +3517,7 @@ GameObject:
   - component: {fileID: 2061564062}
   m_Layer: 0
   m_Name: Object
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

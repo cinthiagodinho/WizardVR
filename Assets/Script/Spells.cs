@@ -11,14 +11,15 @@ public class Spells : MonoBehaviour
     public GameObject fire;
     public GameObject shield;
     public GameObject areaSpell;
+    public GameObject thunderbolt;
     public GameObject popCube;
     private float timeTillCubeDisappear = 2;
 
     //For testing without VR
-    public static bool shieldlaunched = false;
-    public static bool areaSpelllaunched = false;
-
+    public static bool shieldSpellLaunched = false;
+    public static bool areaSpellLaunched = false;
     public static bool telekinesisOn = false;
+    public static bool thunderBoltLaunched = false;
     VRGestureRig rig;
     IInput input;
 
@@ -27,7 +28,7 @@ public class Spells : MonoBehaviour
     Transform playerHandR;
 
     private GameObject target;
-  
+
     void Start()
     {
         rig = FindObjectOfType<VRGestureRig>();
@@ -65,12 +66,16 @@ public class Spells : MonoBehaviour
                 DoFire();
                 break;
             case "Inferno":
-                if (!areaSpelllaunched)
+                if (!areaSpellLaunched)
                     DoAreaSpell();
                 break;
             case "EnergyShield":
-                if (!shieldlaunched)
+                if (!shieldSpellLaunched)
                     DoShield();
+                break;
+            case "ThunderBolt":
+                if (!thunderBoltLaunched)
+                    DoThunderBolt();
                 break;
         }
     }
@@ -83,15 +88,20 @@ public class Spells : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.Z))
         {
-            if (!shieldlaunched)
+            if (!shieldSpellLaunched)
                 DoShield();
         }
 
         if (Input.GetKeyDown(KeyCode.E))
         {
-            if (!areaSpelllaunched)
+            if (!areaSpellLaunched)
                 DoAreaSpell();
-        }        
+        }
+        if (Input.GetKeyDown(KeyCode.R))
+        {
+            if (!thunderBoltLaunched)
+                DoThunderBolt();
+        }
     }
 
     void DoFire()
@@ -109,7 +119,7 @@ public class Spells : MonoBehaviour
 
     void DoShield()
     {
-        shieldlaunched = true;
+        shieldSpellLaunched = true;
         GameObject shieldInstance = GameObject.Instantiate(shield, playerHandR.transform);
         shieldInstance.transform.localPosition = new Vector3(0.2f, 0, 0.4f);
         shieldInstance.transform.localEulerAngles = new Vector3(0, 90, 0);
@@ -118,11 +128,16 @@ public class Spells : MonoBehaviour
 
     void DoAreaSpell()
     {
-        areaSpelllaunched = true;
+        areaSpellLaunched = true;
         GameObject areaSpellInstance = GameObject.Instantiate(areaSpell, playerHandR.transform.position + (playerHandR.transform.forward * 3), areaSpell.transform.rotation);
         areaSpellInstance.transform.parent = playerHandR.transform;
     }
 
+    void DoThunderBolt()
+    {
+        thunderBoltLaunched = true;
+        GameObject.Instantiate(thunderbolt, playerHandR.position, playerHandR.rotation);
+    }
     void PopCube()
     {
         GameObject cube = GameObject.Instantiate(popCube);

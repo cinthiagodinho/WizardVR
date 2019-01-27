@@ -22,7 +22,7 @@ public class ShieldSpell : MonoBehaviour
 
         if (durability <= 0)
         {
-            Spells.shieldlaunched = false;
+            Spells.shieldSpellLaunched = false;
             Destroy(gameObject);
         }
     }
@@ -48,7 +48,7 @@ public class ShieldSpell : MonoBehaviour
     IEnumerator DestroySelf()
     {
         yield return new WaitForSeconds(timeTillDeath);
-        Spells.shieldlaunched = false;
+        Spells.shieldSpellLaunched = false;
         Destroy(gameObject);
     }
     public float getTimer()

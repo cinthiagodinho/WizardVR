@@ -62,7 +62,7 @@ public class AreaSpell : MonoBehaviour
     {
         gameObject.transform.GetChild(0).gameObject.SetActive(true);
         yield return new WaitForSeconds(timeTillDeath);
-        Spells.areaSpelllaunched = false;
+        Spells.areaSpellLaunched = false;
         Destroy(gameObject);
     }
 }
