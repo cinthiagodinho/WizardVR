@@ -16,9 +16,15 @@ public class FirePower : MonoBehaviour
         rb.AddRelativeForce(force, ForceMode.Impulse);
     }
 
-    void FixedUpdate()
+    void Update()
     {
-
+        /*if (Input.GetKeyDown(KeyCode.Space))
+        {            
+            float speed = -gameObject.GetComponent<FirePower>().speed;
+            Vector3 force = new Vector3(gameObject.transform.position.x, gameObject.transform.position.y, speed);
+            gameObject.GetComponent<Rigidbody>().AddRelativeForce(force * 3, ForceMode.Impulse);
+            Debug.Log("Force : " + force);
+        }*/
     }
 
     void OnCollisionEnter(Collision collision)
@@ -40,9 +46,9 @@ public class FirePower : MonoBehaviour
             {
                 if (collision.gameObject.GetComponent<ShieldSpell>().getTimer() > collision.gameObject.GetComponent<ShieldSpell>().getCriticalParade())
                 {
-                    StartCoroutine(DestroySelf(collision));             
+                    StartCoroutine(DestroySelf(collision));
                 }
-                       Debug.Log("touché");
+                Debug.Log("touché");
             }
             else
             {

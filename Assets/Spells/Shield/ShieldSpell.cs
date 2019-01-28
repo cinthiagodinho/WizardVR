@@ -19,7 +19,8 @@ public class ShieldSpell : MonoBehaviour
             GameObject.Destroy(this.gameObject);
             Spells.shieldSpellLaunched = false;
             GameObject.Instantiate(SpawnAfterDead, this.transform.position, SpawnAfterDead.transform.rotation);
-        }
+        }      
+
     }
 
     void OnCollisionEnter(Collision col)
@@ -30,12 +31,12 @@ public class ShieldSpell : MonoBehaviour
             {
                 float speed = col.gameObject.GetComponent<FirePower>().speed;
                 Vector3 force = new Vector3(col.gameObject.transform.position.x, col.gameObject.transform.position.y, speed);
-                col.gameObject.GetComponent<Rigidbody>().AddRelativeForce(force, ForceMode.Impulse);
+                col.gameObject.GetComponent<Rigidbody>().AddRelativeForce(-force, ForceMode.Impulse);
                 GameObject.Destroy(this.gameObject);
                 Spells.shieldSpellLaunched = false;
                 GameObject.Instantiate(SpawnAfterDead, this.transform.position, SpawnAfterDead.transform.rotation);
                 Debug.Log("on renvoie la boule de feu");
-                Debug.Log("vitesse de la boule de feu : "+ speed);
+                Debug.Log("vitesse de la boule de feu : " + speed);
             }
             else
             {
