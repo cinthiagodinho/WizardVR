@@ -56,14 +56,14 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1017700590560932}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: 0, y: 1, z: 0, w: 0}
   m_LocalPosition: {x: 25.52, y: -2.56, z: -7.76}
   m_LocalScale: {x: 3, y: 0.1, z: 3}
   m_Children:
   - {fileID: 4736691924862894}
   m_Father: {fileID: 0}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 180, z: 0}
 --- !u!4 &4736691924862894
 Transform:
   m_ObjectHideFlags: 1
@@ -162,9 +162,6 @@ MonoBehaviour:
   controller: 2
   buttonName: RHandTrigger
   timeTillDeath: 7.5
-  damages: {fileID: 1579487594350256}
-  matInProgress: {fileID: 2100000, guid: 941a2f785c921af4fbdbb9b7c22de9e8, type: 2}
-  matValidated: {fileID: 2100000, guid: 725d7b8206bcd3b458b6675ae698f2c4, type: 2}
   speed: 0.03
 --- !u!114 &114943771404224460
 MonoBehaviour:

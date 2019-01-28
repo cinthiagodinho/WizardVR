@@ -386,9 +386,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speed: 300
   timeTillDeath: 0.1
-  damages: 1
-  intervalle: 2
-  duration: 4
   fireExplosion: {fileID: 154858, guid: 2e77687314ed7c24a86f4b8d4edd4d7f, type: 2}
 --- !u!135 &13502446
 SphereCollider:

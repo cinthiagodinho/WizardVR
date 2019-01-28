@@ -13,26 +13,16 @@ public class AreaSpell : MonoBehaviour
     public float timeTillDeath;
     private bool validated = false;
 
-    public GameObject damages;
-    public Material matInProgress;
-    public Material matValidated;
+    //public Material matInProgress;
+    //public Material matValidated;
     public float speed;
 
-    VRGestureRig rig;
-    IInput input;
+    VRGestureRig rig;   
     Transform playerHandR;
 
     void Start()
-    {
-        rig = FindObjectOfType<VRGestureRig>();
-        if (rig == null)
-        {
-            Debug.Log("there is no VRGestureRig in the scene, please add one");
-        }
-
-        playerHandR = rig.handRight;
-
-        input = rig.GetInput(rig.mainHand);
+    {  
+        playerHandR = rig.handRight;      
     }
     void Update()
     {
@@ -41,7 +31,7 @@ public class AreaSpell : MonoBehaviour
 
         if (validated)
         {
-            gameObject.GetComponent<MeshRenderer>().material = matValidated;
+            //gameObject.GetComponent<MeshRenderer>().material = matValidated;
             StartCoroutine(DestroySelf());
             gameObject.transform.parent = null;
         }
@@ -58,9 +48,22 @@ public class AreaSpell : MonoBehaviour
                 gameObject.transform.position -= new Vector3(0, 0, speed);
         }
     }
+
+    void OnTriggerEnter(Collider collision)
+    {
+        if (collision.gameObject.tag == "Enemy")
+        {
+            if (collision.gameObject.GetComponentInParent<Opponent>())
+                collision.gameObject.GetComponentInParent<Opponent>().setIsTouched(2);
+
+            if (collision.gameObject.GetComponent<Target>())
+                collision.gameObject.GetComponent<Target>().setIsTouched(2);
+        }
+    }
+
     IEnumerator DestroySelf()
     {
-        gameObject.transform.GetChild(0).gameObject.SetActive(true);
+        //gameObject.transform.GetChild(0).gameObject.SetActive(true);
         yield return new WaitForSeconds(timeTillDeath);
         Spells.areaSpellLaunched = false;
         Destroy(gameObject);

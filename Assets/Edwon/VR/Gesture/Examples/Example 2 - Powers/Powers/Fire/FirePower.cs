@@ -40,8 +40,9 @@ public class FirePower : MonoBehaviour
             {
                 if (collision.gameObject.GetComponent<ShieldSpell>().getTimer() > collision.gameObject.GetComponent<ShieldSpell>().getCriticalParade())
                 {
-                    StartCoroutine(DestroySelf(collision));
+                    StartCoroutine(DestroySelf(collision));             
                 }
+                       Debug.Log("touché");
             }
             else
             {
