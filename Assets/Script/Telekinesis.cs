@@ -9,11 +9,11 @@ public class Telekinesis : MonoBehaviour
 {
     //Controller
     public OVRInput.Controller controller;
-    public string buttonName;   
+    public string buttonName;
     VRGestureRig rig;
-    IInput input;    
+    IInput input;
     Transform playerHandL;
-  
+
     //Variables for telekinesis
     private GameObject grabbedObject;
     private bool telekinesisOn = false;
@@ -28,13 +28,13 @@ public class Telekinesis : MonoBehaviour
 
     void Awake()
     {
-        if (lineRenderer == null)
+        /* if (lineRenderer == null)
         {
             lineRenderer = gameObject.AddComponent<LineRenderer>();
             lineRenderer.shadowCastingMode = UnityEngine.Rendering.ShadowCastingMode.Off;
             lineRenderer.receiveShadows = false;
             lineRenderer.widthMultiplier = 0.02f;
-        }
+        }*/
     }
     void Start()
     {
@@ -43,7 +43,7 @@ public class Telekinesis : MonoBehaviour
         {
             Debug.Log("there is no VRGestureRig in the scene, please add one");
         }
-         
+
         playerHandL = rig.handLeft;
 
         input = rig.GetInput(rig.mainHand);
@@ -51,27 +51,28 @@ public class Telekinesis : MonoBehaviour
     void Update()
     {
         //For testing
-       /*Ray pointer = new Ray(playerHandL.position, playerHandL.forward);
+        /* Vector3 begin = playerHandL.transform.position + playerHandL.transform.forward * 1f;
+          Ray pointer = new Ray(begin, playerHandL.forward);
 
-        if (lineRenderer != null)
-        {
-            lineRenderer.SetPosition(0, pointer.origin);
-            lineRenderer.SetPosition(1, pointer.origin + pointer.direction * 30);
-        }     
+          if (lineRenderer != null)
+          {
+              lineRenderer.SetPosition(0, pointer.origin);
+              lineRenderer.SetPosition(1, pointer.origin + pointer.direction * 20);
+          }
 
-        RaycastHit hit;
+          RaycastHit hit;
 
-        if (Physics.Raycast(pointer, out hit, 30))
-        {
-            if (lineRenderer != null)
-            {
-                lineRenderer.SetPosition(1, hit.point);
-            }
-        }*/
+          if (Physics.Raycast(pointer, out hit, 20))
+          {
+              if (lineRenderer != null)
+              {
+                  lineRenderer.SetPosition(1, hit.point);
+              }
+          }*/
 
-        if (!telekinesisOn && Input.GetAxis(buttonName) == 1)        
+        if (!telekinesisOn && Input.GetAxis(buttonName) == 1)
             GrabObject();
-        
+
         else if (telekinesisOn && Input.GetAxis(buttonName) < 1)
         {
             DropObject();
@@ -83,15 +84,18 @@ public class Telekinesis : MonoBehaviour
             lastRotation = currentRotation;
             currentRotation = grabbedObject.transform.rotation;
 
-            if (playerHandL.transform.localRotation.z > 0.30f)
-                grabbedObject.transform.position += new Vector3(0, 0, speed);
+            if (playerHandL.gameObject.transform.localRotation.x > 0.15f)
+                grabbedObject.transform.position += new Vector3(speed, 0, 0);
 
-            else if (playerHandL.transform.localRotation.z < -0.30f)
-                grabbedObject.transform.position -= new Vector3(0, 0, speed);
+            else if (playerHandL.transform.localRotation.x < -0.10f)
+            {
+                grabbedObject.transform.position -= new Vector3(speed, 0, 0);
+            }
 
-            else if(playerHandL.transform.localRotation.z == 0){              
-                grabbedObject.transform.position = Vector3.MoveTowards(grabbedObject.transform.position, playerHandL.transform.position+ (playerHandL.transform.forward * 3), 2 * Time.deltaTime);
-            }           
+            else if (playerHandL.transform.localRotation.z == 0)
+            {
+                grabbedObject.transform.position = Vector3.MoveTowards(grabbedObject.transform.position, playerHandL.transform.position + (playerHandL.transform.forward * 3), 2 * Time.deltaTime);
+            }
         }
     }
 
@@ -100,8 +104,9 @@ public class Telekinesis : MonoBehaviour
         telekinesisOn = true;
         RaycastHit hit;
         Vector3 fwd = playerHandL.transform.TransformDirection(Vector3.forward);
+        Vector3 begin = playerHandL.transform.position + playerHandL.transform.forward * 0.9f;
 
-        if (Physics.Raycast(playerHandL.transform.position, fwd, out hit, 30))
+        if (Physics.Raycast(begin, fwd, out hit, 30))
         {
             if (hit.transform.gameObject.tag == "Interactable")
             {
