@@ -42,7 +42,6 @@ public class Spells : MonoBehaviour
         playerHandL = rig.handLeft;
 
         input = rig.GetInput(rig.mainHand);
-
     }
 
     void OnEnable()
@@ -107,15 +106,14 @@ public class Spells : MonoBehaviour
     void DoFire()
     {
         GameObject fireInstance = GameObject.Instantiate(fire, playerHandR.position  + (playerHandR.transform.forward * 1.1f), playerHandR.rotation);
-
     }
 
     void DoShield()
     {
         shieldSpellLaunched = true;
-        GameObject shieldInstance = GameObject.Instantiate(shield, playerHandR.transform);
-        shieldInstance.transform.localPosition = new Vector3(0, 0, 0.5f);        
-        shieldInstance.transform.parent = null;
+        GameObject shieldInstance = GameObject.Instantiate(shield, playerHandR.transform.position + (playerHandR.transform.forward * 3), playerHandR.transform.rotation);
+        //shieldInstance.transform.localPosition = new Vector3(0, 0, 0.5f);        
+        //shieldInstance.transform.parent = null;
     }
 
     void DoAreaSpell()

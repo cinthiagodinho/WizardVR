@@ -7,9 +7,10 @@ public class Shoot : MonoBehaviour
     public GameObject fire;  
     public GameObject baguette;
     public float startingTime;
+    public float shoot;
 
     void Start(){
-        InvokeRepeating("DoFire", startingTime, 4f);
+        InvokeRepeating("DoFire", startingTime, shoot);
     }
   
     void DoFire()

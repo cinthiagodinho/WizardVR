@@ -9,7 +9,7 @@ public class Telekinesis : MonoBehaviour
 {
     //Controller
     public OVRInput.Controller controller;
-    public string buttonName;
+    public string buttonName;   
     VRGestureRig rig;
     IInput input;    
     Transform playerHandL;
@@ -51,14 +51,13 @@ public class Telekinesis : MonoBehaviour
     void Update()
     {
         //For testing
-        Ray pointer = new Ray(playerHandL.position, playerHandL.forward);
+       /*Ray pointer = new Ray(playerHandL.position, playerHandL.forward);
 
         if (lineRenderer != null)
         {
             lineRenderer.SetPosition(0, pointer.origin);
             lineRenderer.SetPosition(1, pointer.origin + pointer.direction * 30);
-        }
-        //
+        }     
 
         RaycastHit hit;
 
@@ -68,7 +67,7 @@ public class Telekinesis : MonoBehaviour
             {
                 lineRenderer.SetPosition(1, hit.point);
             }
-        }
+        }*/
 
         if (!telekinesisOn && Input.GetAxis(buttonName) == 1)        
             GrabObject();
@@ -109,8 +108,8 @@ public class Telekinesis : MonoBehaviour
                 telekinesisOn = true;
                 grabbedObject = hit.transform.gameObject;
                 grabbedObject.transform.parent = playerHandL.transform;
-                baseMeshColor = grabbedObject.GetComponent<MeshRenderer>().material.color;
-                grabbedObject.GetComponent<MeshRenderer>().material.color = Color.blue;
+                //baseMeshColor = grabbedObject.GetComponent<MeshRenderer>().material.color;
+                //grabbedObject.GetComponent<MeshRenderer>().material.color = Color.blue;
                 grabbedObject.GetComponent<Rigidbody>().isKinematic = true;
             }
         }
@@ -125,7 +124,7 @@ public class Telekinesis : MonoBehaviour
             grabbedObject.GetComponent<Rigidbody>().isKinematic = false;
             grabbedObject.GetComponent<Rigidbody>().velocity = controllerVelocity * 5;
             grabbedObject.GetComponent<Rigidbody>().angularVelocity = GetAngularVelocity();
-            grabbedObject.GetComponent<MeshRenderer>().material.color = baseMeshColor;
+            //grabbedObject.GetComponent<MeshRenderer>().material.color = baseMeshColor;
             grabbedObject = null;
         }
     }
