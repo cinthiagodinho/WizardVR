@@ -65,32 +65,33 @@ public class Target : MonoBehaviour
             }
             yield return new WaitForSeconds(1);
         }
-
         mesh.material.color = baseMesh;
         Debug.Log("Health : " + health);
         StopCoroutine(HurtFire(0, 0, 0));
     }
 
-    IEnumerator HurtAreaSpell(int damage, float duration, float intervalle, float limit)
+    IEnumerator HurtAreaSpell(int damages, float duration, float intervalle, float limit)
     {
-        int count = 0;
+        float count = 0;
 
         while (duration > 0)
         {
-            duration--;
-            count++;
+            duration -= 0.5f;
+            count += 0.5f;            
 
             if (count == intervalle)
-            {
-                if (duration <= limit)
-                    damage--;
+            {    
+                Debug.Log("BAM");
+                
+               if (duration == limit)
+                    damages--;
 
-                health -= damage;
+                health -= damages;
                 count = 0;
             }
-            yield return new WaitForSeconds(1);
+            Debug.Log("duration : " + duration);
+            yield return new WaitForSeconds(0.5f);
         }
-
         mesh.material.color = baseMesh;
         Debug.Log("Health : " + health);
         StopCoroutine(HurtAreaSpell(0, 0, 0, 0));

@@ -31,8 +31,10 @@ public class FireBallSpell : MonoBehaviour
         }
 
         if (!validated)
+        {
             gameObject.transform.position = playerHandR.position + (playerHandR.transform.forward * 1.1f);
-        gameObject.transform.rotation = playerHandR.rotation;
+            gameObject.transform.rotation = playerHandR.rotation;
+        }
     }
 
     void OnEnable()
@@ -45,33 +47,6 @@ public class FireBallSpell : MonoBehaviour
         ActivatedGameObject.SetActive(true);
         core.SetActive(false);
         coreLightning.SetActive(false);
-    }
-
-    void OnCollisionEnter(Collision collision)
-    {
-
-        if (collision.gameObject.tag == "Enemy")
-        {
-            if (collision.gameObject.GetComponentInParent<Opponent>())
-                collision.gameObject.GetComponentInParent<Opponent>().setIsTouched(1);
-
-            if (collision.gameObject.GetComponent<Target>())
-                collision.gameObject.GetComponent<Target>().setIsTouched(1);
-
-            ActivateGO();
-        }
-
-        if (collision.gameObject.GetComponent<ShieldSpell>())
-        {
-            if (collision.gameObject.GetComponent<ShieldSpell>().getTimer() > collision.gameObject.GetComponent<ShieldSpell>().getCriticalParade())
-            {
-                ActivateGO();
-            }
-        }
-        else
-        {
-            ActivateGO();
-        }
     }
 }
 

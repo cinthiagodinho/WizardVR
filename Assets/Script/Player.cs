@@ -28,6 +28,7 @@ public class Player : MonoBehaviour
     {
         if (collision.gameObject.GetComponent<FirePower>())
         {
+            //Debug.Log("Ouch !");
             //lifePoints--;
             //lifeText.text = lifePoints.ToString();
             //StartCoroutine("Hurt");

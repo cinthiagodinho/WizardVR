@@ -37,7 +37,6 @@ public class AreaSpell : MonoBehaviour
         {
             gameObject.transform.position = new Vector3(gameObject.transform.position.x, -2.50f, gameObject.transform.position.z);
             gameObject.transform.rotation = Quaternion.Euler(Vector3.zero);
-            Debug.Log(playerHandR.gameObject.transform.localRotation.x);
 
             if (playerHandR.gameObject.transform.localRotation.x > 0.20f)
                 gameObject.transform.position += new Vector3(speed, 0, 0);

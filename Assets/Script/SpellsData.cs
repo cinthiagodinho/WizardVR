@@ -27,15 +27,15 @@ public class SpellsData : MonoBehaviour
     }
     public int getAreaSpellDamages()
     {
-        return fireDamages;
+        return areaSpellDamages;
     }
     public float getAreaSpellIntervalle()
     {
-        return fireIntervalle;
+        return areaSpellIntervalle;
     }
     public float getAreaSpellDuration()
     {
-        return fireDuration;
+        return areaSpellDuration;
     }
 
 	public float getAreaSpellLimit(){

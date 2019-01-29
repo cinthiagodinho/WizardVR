@@ -128,6 +128,16 @@ public class RFX4_TransformMotion : MonoBehaviour
         if (handler != null)
             handler(this, new RFX4_CollisionInfo {Hit = hit});
         CollidedInstances.Clear();
+
+        if (hit.transform.tag == "Enemy")
+        {
+            if (hit.transform.gameObject.GetComponentInParent<Opponent>())
+                hit.transform.gameObject.GetComponentInParent<Opponent>().setIsTouched(1);
+
+            if (hit.transform.gameObject.GetComponent<Target>())
+                hit.transform.gameObject.GetComponent<Target>().setIsTouched(1);
+        }       
+        
         foreach (var effect in EffectsOnCollision)
         {
             var instance = Instantiate(effect, hit.point + hit.normal * CollisionOffset, new Quaternion()) as GameObject;
