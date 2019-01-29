@@ -892,7 +892,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 4294967295
   EffectsOnCollision:
-  - {fileID: 167520, guid: f3b6bcc909e8cd2498f7c7e6191e0e98, type: 2}
+  - {fileID: 1320338093719012, guid: e9e44f5b9cc8e644690ae7c61f96d070, type: 2}
   CollisionOffset: 0.15
   DestroyTimeDelay: 3
   CollisionEffectInWorldSpace: 1

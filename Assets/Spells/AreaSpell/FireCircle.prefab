@@ -518,7 +518,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1147009909708612}
   m_LocalRotation: {x: 0.00014129252, y: -0.9998586, z: -0.01216143, w: -0.011616447}
-  m_LocalPosition: {x: 1.65, y: -2.59, z: -7.36}
+  m_LocalPosition: {x: 2.7, y: -2.59, z: -7.36}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4998259267473898}
@@ -1562,7 +1562,7 @@ MonoBehaviour:
   controller: 2
   buttonName: RHandTrigger
   timeTillDeath: 7.5
-  speed: 0.03
+  speed: 0.08
 --- !u!114 &114234441901964846
 MonoBehaviour:
   m_ObjectHideFlags: 1

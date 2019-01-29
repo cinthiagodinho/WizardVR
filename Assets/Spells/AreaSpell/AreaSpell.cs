@@ -12,17 +12,15 @@ public class AreaSpell : MonoBehaviour
     Rigidbody rb;
     public float timeTillDeath;
     private bool validated = false;
-
-    //public Material matInProgress;
-    //public Material matValidated;
     public float speed;
 
-    VRGestureRig rig;   
+    VRGestureRig rig;
     Transform playerHandR;
 
     void Start()
-    {  
-        playerHandR = rig.handRight;      
+    {
+        rig = FindObjectOfType<VRGestureRig>();
+        playerHandR = rig.handRight;
     }
     void Update()
     {
@@ -31,7 +29,6 @@ public class AreaSpell : MonoBehaviour
 
         if (validated)
         {
-            //gameObject.GetComponent<MeshRenderer>().material = matValidated;
             StartCoroutine(DestroySelf());
             gameObject.transform.parent = null;
         }
@@ -40,12 +37,15 @@ public class AreaSpell : MonoBehaviour
         {
             gameObject.transform.position = new Vector3(gameObject.transform.position.x, -2.50f, gameObject.transform.position.z);
             gameObject.transform.rotation = Quaternion.Euler(Vector3.zero);
+            Debug.Log(playerHandR.gameObject.transform.localRotation.x);
 
-            if (playerHandR.gameObject.transform.localRotation.z > 0.30f)
-                gameObject.transform.position += new Vector3(0, 0, speed);
+            if (playerHandR.gameObject.transform.localRotation.x > 0.20f)
+                gameObject.transform.position += new Vector3(speed, 0, 0);
 
-            else if (playerHandR.transform.localRotation.z < -0.30f)
-                gameObject.transform.position -= new Vector3(0, 0, speed);
+            else if (playerHandR.transform.localRotation.x < -0.20f)
+            {
+                gameObject.transform.position -= new Vector3(speed, 0, 0);
+            }
         }
     }
 
