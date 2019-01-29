@@ -6,14 +6,11 @@ public class Target : MonoBehaviour
 {
     public int health;
     public float fireDuration;
-    protected int isTouched = 0;
-    public MeshRenderer mesh;
-    private Color baseMesh;
+    protected int isTouched = 0; 
     private GameObject gameController;
 
     void Start()
-    {
-        baseMesh = mesh.material.color;
+    {      
         gameController = GameObject.FindGameObjectWithTag("GameController");
     }
     void Update()
@@ -25,8 +22,7 @@ public class Target : MonoBehaviour
             float intervalle = 0;
 
             if (isTouched == 1)
-            {
-                mesh.material.color = Color.red;
+            {               
                 damages = gameController.GetComponent<SpellsData>().getFireDamages();
                 duration = gameController.GetComponent<SpellsData>().getFireDuration();
                 intervalle = gameController.GetComponent<SpellsData>().getFireIntervalle();
@@ -35,8 +31,7 @@ public class Target : MonoBehaviour
             else if (isTouched == 2)
             {
                 float limit = 0;
-
-                mesh.material.color = Color.red;
+               
                 damages = gameController.GetComponent<SpellsData>().getAreaSpellDamages();
                 duration = gameController.GetComponent<SpellsData>().getAreaSpellDuration();
                 intervalle = gameController.GetComponent<SpellsData>().getAreaSpellIntervalle();
@@ -64,8 +59,7 @@ public class Target : MonoBehaviour
                 count = 0;
             }
             yield return new WaitForSeconds(1);
-        }
-        mesh.material.color = baseMesh;
+        }       
         Debug.Log("Health : " + health);
         StopCoroutine(HurtFire(0, 0, 0));
     }
@@ -80,19 +74,15 @@ public class Target : MonoBehaviour
             count += 0.5f;            
 
             if (count == intervalle)
-            {    
-                Debug.Log("BAM");
-                
+            {                
                if (duration == limit)
                     damages--;
 
                 health -= damages;
                 count = 0;
-            }
-            Debug.Log("duration : " + duration);
+            }            
             yield return new WaitForSeconds(0.5f);
-        }
-        mesh.material.color = baseMesh;
+        }       
         Debug.Log("Health : " + health);
         StopCoroutine(HurtAreaSpell(0, 0, 0, 0));
     }

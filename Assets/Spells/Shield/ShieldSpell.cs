@@ -20,7 +20,6 @@ public class ShieldSpell : MonoBehaviour
             Spells.shieldSpellLaunched = false;
             GameObject.Instantiate(SpawnAfterDead, this.transform.position, SpawnAfterDead.transform.rotation);
         }      
-
     }
 
     void OnCollisionEnter(Collision col)
@@ -34,9 +33,7 @@ public class ShieldSpell : MonoBehaviour
                 col.gameObject.GetComponent<Rigidbody>().AddRelativeForce(-force, ForceMode.Impulse);
                 GameObject.Destroy(this.gameObject);
                 Spells.shieldSpellLaunched = false;
-                GameObject.Instantiate(SpawnAfterDead, this.transform.position, SpawnAfterDead.transform.rotation);
-                Debug.Log("on renvoie la boule de feu");
-                Debug.Log("vitesse de la boule de feu : " + speed);
+                GameObject.Instantiate(SpawnAfterDead, this.transform.position, SpawnAfterDead.transform.rotation);               
             }
             else
             {
