@@ -5,34 +5,44 @@ using UnityEngine.UI;
 
 public class Cooldown : MonoBehaviour
 {
+    public float fireCooldown;
+    private float _fireCooldown;
     public float shieldCooldown;
     private float _shieldCooldown;
-    public Text shieldTextCooldown;
     public float zoneAttackCooldown;
     private float _zoneAttackCooldown;
-    public Text zoneAttackTextCooldown;
+
+
+    IEnumerator FireCooldown()
+    {
+        while (fireCooldown > -1)
+        {
+            fireCooldown--;
+            yield return new WaitForSeconds(1f);
+        }
+
+        fireCooldown = _fireCooldown;
+    }
+
 
     IEnumerator ShieldCooldown()
     {
         while (shieldCooldown > -1)
         {
-            shieldTextCooldown.text = shieldCooldown.ToString();
             shieldCooldown--;
             yield return new WaitForSeconds(1f);
         }
-        shieldTextCooldown.text = "";
-        shieldCooldown = _shieldCooldown;      
+
+        shieldCooldown = _shieldCooldown;
     }
 
     IEnumerator ZoneAttackCooldown()
     {
         while (zoneAttackCooldown > 0)
         {
-            zoneAttackTextCooldown.text = zoneAttackCooldown.ToString();
             zoneAttackCooldown--;
             yield return new WaitForSeconds(1f);
         }
-        zoneAttackTextCooldown.text = "";
-        zoneAttackCooldown = _shieldCooldown; 
+        zoneAttackCooldown = _shieldCooldown;
     }
 }

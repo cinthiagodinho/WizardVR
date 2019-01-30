@@ -9,13 +9,15 @@ using Edwon.VR.Input;
 public class Spells : MonoBehaviour
 {
     public GameObject fire;
+    private GameObject fireInstance;
     public GameObject shield;
     public GameObject areaSpell;
     public GameObject thunderbolt;
     public GameObject popCube;
     private float timeTillCubeDisappear = 2;
 
-    //For testing without VR
+    public static bool fireBallLaunched = false;
+    public static int fireBallCount = 1;
     public static bool shieldSpellLaunched = false;
     public static bool areaSpellLaunched = false;
     public static bool telekinesisOn = false;
@@ -32,7 +34,7 @@ public class Spells : MonoBehaviour
     void Start()
     {
         rig = FindObjectOfType<VRGestureRig>();
-   
+
         if (rig == null)
         {
             Debug.Log("there is no VRGestureRig in the scene, please add one");
@@ -102,11 +104,22 @@ public class Spells : MonoBehaviour
              if (!thunderBoltLaunched)
                  DoThunderBolt();
          }*/
+
+        if (fireBallCount == 2 && !fireBallLaunched)
+            DoFire();
+
+        if (fireBallCount == 3 && !fireBallLaunched)
+            DoFire();
+
+        if (fireBallCount == 4 && !fireBallLaunched)
+            fireBallCount = 1;
     }
 
     void DoFire()
     {
-        GameObject fireInstance = GameObject.Instantiate(fire, playerHandR.position + (playerHandR.transform.forward * 1.1f), playerHandR.rotation);
+        fireBallLaunched = true;
+        fireInstance = GameObject.Instantiate(fire, playerHandR.position + (playerHandR.transform.forward * 1.1f), playerHandR.rotation);
+        Debug.Log(fireBallCount);
     }
 
     void DoShield()
@@ -114,7 +127,6 @@ public class Spells : MonoBehaviour
         shieldSpellLaunched = true;
         GameObject shieldInstance = GameObject.Instantiate(shield, playerHandR.transform);
         shieldInstance.transform.localPosition = new Vector3(0, 0, 0.5f);
-        //shieldInstance.transform.parent = null;
     }
 
     void DoAreaSpell()

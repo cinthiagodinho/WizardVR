@@ -46,7 +46,7 @@ public class FireBallSpell : MonoBehaviour
     {
         ActivatedGameObject.SetActive(true);
         core.SetActive(false);
-        coreLightning.SetActive(false);
+        coreLightning.SetActive(false);       
     }
 }
 
