@@ -84,15 +84,15 @@ public class Telekinesis : MonoBehaviour
             lastRotation = currentRotation;
             currentRotation = grabbedObject.transform.rotation;
 
-            if (playerHandL.gameObject.transform.localRotation.x > 0.15f)
+            if (playerHandL.gameObject.transform.localRotation.x > 0.30f)
                 grabbedObject.transform.position += new Vector3(speed, 0, 0);
 
-            else if (playerHandL.transform.localRotation.x < -0.10f)
+            else if (playerHandL.transform.localRotation.x < -0.30f)
             {
                 grabbedObject.transform.position -= new Vector3(speed, 0, 0);
             }
 
-            else if (playerHandL.transform.localRotation.z == 0)
+            else if (playerHandL.transform.localRotation.x == 0)
             {
                 grabbedObject.transform.position = Vector3.MoveTowards(grabbedObject.transform.position, playerHandL.transform.position + (playerHandL.transform.forward * 3), 2 * Time.deltaTime);
             }

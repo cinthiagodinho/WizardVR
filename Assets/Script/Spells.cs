@@ -111,8 +111,8 @@ public class Spells : MonoBehaviour
     void DoShield()
     {
         shieldSpellLaunched = true;
-        GameObject shieldInstance = GameObject.Instantiate(shield, playerHandR.transform.position + (playerHandR.transform.forward * 3), playerHandR.transform.rotation);
-        //shieldInstance.transform.localPosition = new Vector3(0, 0, 0.5f);        
+        GameObject shieldInstance = GameObject.Instantiate(shield, playerHandR.transform);
+        shieldInstance.transform.localPosition = new Vector3(0, 0, 0.5f);        
         //shieldInstance.transform.parent = null;
     }
 
