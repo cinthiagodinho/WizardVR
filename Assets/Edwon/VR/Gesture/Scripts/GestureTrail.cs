@@ -4,7 +4,7 @@ using System.Collections.Generic;
 
 namespace Edwon.VR.Gesture
 {
-    
+
     public class GestureTrail : MonoBehaviour
     {
         CaptureHand registeredHand;
@@ -26,7 +26,7 @@ namespace Edwon.VR.Gesture
 
         void OnEnable()
         {
-            if(registeredHand != null)
+            if (registeredHand != null)
             {
                 SubscribeToEvents();
             }
@@ -56,7 +56,7 @@ namespace Edwon.VR.Gesture
 
         void UnsubscribeAll()
         {
-            
+
         }
 
         void OnDestroy()
@@ -112,15 +112,16 @@ namespace Edwon.VR.Gesture
 
         public void StopTrail()
         {
-            currentRenderer.SetColors(Color.blue, Color.cyan);
+            currentRenderer.SetColors(Color.blue, Color.cyan);   
             listening = false;
+            ClearTrail();
         }
 
         public void ClearTrail()
         {
             currentRenderer.SetVertexCount(0);
-        }
-
+        }    
+        
         public bool UseCheck()
         {
             return currentlyInUse;

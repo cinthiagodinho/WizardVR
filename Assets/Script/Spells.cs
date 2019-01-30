@@ -64,11 +64,11 @@ public class Spells : MonoBehaviour
             case "FireBall":
                 DoFire();
                 break;
-            case "Inferno":
+            case "FireCircle":
                 if (!areaSpellLaunched)
                     DoAreaSpell();
                 break;
-            case "EnergyShield":
+            case "Shield":
                 if (!shieldSpellLaunched)
                     DoShield();
                 break;

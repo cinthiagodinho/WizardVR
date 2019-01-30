@@ -1,7 +1,7 @@
 {
     "gestures": [
         {
-            "name": "EnergyShield",
+            "name": "Shield",
             "hand": 1,
             "isSynchronous": false,
             "exampleCount": 100
@@ -13,15 +13,9 @@
             "exampleCount": 100
         },
         {
-            "name": "Inferno",
+            "name": "FireCircle",
             "hand": 1,
             "isSynchronous": false,
-            "exampleCount": 100
-        },
-        {
-            "name": "Gesture 7",
-            "hand": 1,
-            "isSynchronous": true,
             "exampleCount": 100
         }
     ]
