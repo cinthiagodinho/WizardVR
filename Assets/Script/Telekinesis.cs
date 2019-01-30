@@ -22,7 +22,8 @@ public class Telekinesis : MonoBehaviour
     Quaternion lastRotation;
     Quaternion currentRotation;
     public float speed;
-    private Color baseMeshColor;
+    float prevPosition = 0;
+    float curPosition = 0;
 
     //Debug Line
     LineRenderer lineRenderer = null;
@@ -74,7 +75,6 @@ public class Telekinesis : MonoBehaviour
 
         if (!telekinesisOn && Input.GetAxis(buttonName) == 1)
             GrabObject();
-        
 
         else if (telekinesisOn && Input.GetAxis(buttonName) < 1)
         {
@@ -85,20 +85,15 @@ public class Telekinesis : MonoBehaviour
         {
             controllerVelocity = OVRInput.GetLocalControllerVelocity(controller);
             lastRotation = currentRotation;
-            currentRotation = grabbedObject.transform.rotation;     
+            currentRotation = grabbedObject.transform.rotation;
 
-            debug.text = playerHandL.gameObject.transform.position.ToString();
+            /*  if (playerHandL.gameObject.transform.localPosition.z <= 0.9f)
+                  grabbedObject.transform.position -= new Vector3(speed, 0, 0);
 
-            
-
-
-          /*  if (playerHandL.gameObject.transform.localPosition.z <= 0.9f)
-                grabbedObject.transform.position -= new Vector3(speed, 0, 0);
-
-            else if (playerHandL.transform.localPosition.z >= 1.2f)
-            {
-                grabbedObject.transform.position += new Vector3(speed, 0, 0);
-            }*/
+              else if (playerHandL.transform.localPosition.z >= 1.2f)
+              {
+                  grabbedObject.transform.position += new Vector3(speed, 0, 0);
+              }*/
         }
     }
 
@@ -115,7 +110,7 @@ public class Telekinesis : MonoBehaviour
             {
                 telekinesisOn = true;
                 grabbedObject = hit.transform.gameObject;
-                grabbedObject.transform.parent = playerHandL.transform;        
+                grabbedObject.transform.parent = playerHandL.transform;
                 grabbedObject.GetComponent<Rigidbody>().isKinematic = true;
             }
         }
@@ -129,7 +124,7 @@ public class Telekinesis : MonoBehaviour
             grabbedObject.transform.parent = null;
             grabbedObject.GetComponent<Rigidbody>().isKinematic = false;
             grabbedObject.GetComponent<Rigidbody>().velocity = controllerVelocity * 5;
-            grabbedObject.GetComponent<Rigidbody>().angularVelocity = GetAngularVelocity();      
+            grabbedObject.GetComponent<Rigidbody>().angularVelocity = GetAngularVelocity();
             grabbedObject = null;
         }
     }

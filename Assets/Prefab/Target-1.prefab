@@ -279,7 +279,7 @@ MonoBehaviour:
   fire: {fileID: 130144, guid: 3a73fd7a773a8894296d6dc633f9c5bf, type: 2}
   baguette: {fileID: 1889532864765026}
   startingTime: 4
-  shoot: 4
+  shoot: 10
 --- !u!114 &114211617648631686
 MonoBehaviour:
   m_ObjectHideFlags: 1

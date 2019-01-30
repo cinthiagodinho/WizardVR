@@ -30,7 +30,7 @@ public class Spells : MonoBehaviour
     Transform playerHandR;
 
     private GameObject target;
-
+    
     void Start()
     {
         rig = FindObjectOfType<VRGestureRig>();

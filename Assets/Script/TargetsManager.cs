@@ -5,7 +5,7 @@ using UnityEngine;
 public class TargetsManager : MonoBehaviour
 {
 
-    public Target[] targets;
+    public GameObject[] targets;
 
     void Start()
     {

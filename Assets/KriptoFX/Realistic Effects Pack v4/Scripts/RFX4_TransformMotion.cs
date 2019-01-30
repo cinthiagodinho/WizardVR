@@ -134,8 +134,10 @@ public class RFX4_TransformMotion : MonoBehaviour
             if (hit.transform.gameObject.GetComponentInParent<Opponent>())
                 hit.transform.gameObject.GetComponentInParent<Opponent>().setIsTouched(1);
 
-            if (hit.transform.gameObject.GetComponent<Target>())
-                hit.transform.gameObject.GetComponent<Target>().setIsTouched(1);
+            if (hit.transform.gameObject.GetComponentInChildren<Target>()){
+                hit.transform.gameObject.GetComponentInChildren<Target>().setIsTouched(1);
+                Debug.Log("bordel");
+            }
         }
 
         foreach (var effect in EffectsOnCollision)

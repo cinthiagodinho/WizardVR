@@ -1,16 +1,17 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Target : MonoBehaviour
 {
     public int health;
-    public float fireDuration;
-    protected int isTouched = 0; 
+    protected int isTouched = 0;
     private GameObject gameController;
+    public Text debug;
 
     void Start()
-    {      
+    {
         gameController = GameObject.FindGameObjectWithTag("GameController");
     }
     void Update()
@@ -22,7 +23,7 @@ public class Target : MonoBehaviour
             float intervalle = 0;
 
             if (isTouched == 1)
-            {               
+            {
                 damages = gameController.GetComponent<SpellsData>().getFireDamages();
                 duration = gameController.GetComponent<SpellsData>().getFireDuration();
                 intervalle = gameController.GetComponent<SpellsData>().getFireIntervalle();
@@ -31,7 +32,7 @@ public class Target : MonoBehaviour
             else if (isTouched == 2)
             {
                 float limit = 0;
-               
+
                 damages = gameController.GetComponent<SpellsData>().getAreaSpellDamages();
                 duration = gameController.GetComponent<SpellsData>().getAreaSpellDuration();
                 intervalle = gameController.GetComponent<SpellsData>().getAreaSpellIntervalle();
@@ -42,11 +43,12 @@ public class Target : MonoBehaviour
             isTouched = 0;
         }
         if (health <= 0)
-            Destroy(gameObject);
+            Destroy(gameObject);        
     }
     IEnumerator HurtFire(int damage, float duration, float intervalle)
     {
         int count = 0;
+        debug.gameObject.SetActive(true);
 
         while (duration > 0)
         {
@@ -59,8 +61,10 @@ public class Target : MonoBehaviour
                 count = 0;
             }
             yield return new WaitForSeconds(1);
-        }       
+        }
         Debug.Log("Health : " + health);
+        debug.gameObject.SetActive(false);
+
         StopCoroutine(HurtFire(0, 0, 0));
     }
 
@@ -71,18 +75,18 @@ public class Target : MonoBehaviour
         while (duration > 0)
         {
             duration -= 0.5f;
-            count += 0.5f;            
+            count += 0.5f;
 
             if (count == intervalle)
-            {                
-               if (duration == limit)
+            {
+                if (duration == limit)
                     damages--;
 
                 health -= damages;
                 count = 0;
-            }            
+            }
             yield return new WaitForSeconds(0.5f);
-        }       
+        }
         Debug.Log("Health : " + health);
         StopCoroutine(HurtAreaSpell(0, 0, 0, 0));
     }
@@ -90,5 +94,9 @@ public class Target : MonoBehaviour
     public void setIsTouched(int value)
     {
         isTouched = value;
+    }
+
+    public int getHealth(){
+        return health;
     }
 }
