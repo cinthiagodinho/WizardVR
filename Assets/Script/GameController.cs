@@ -8,6 +8,7 @@ public class GameController : MonoBehaviour
     Scene scene;
     public Player player;
 
+    
     void Start()
     {
         scene = SceneManager.GetActiveScene();

@@ -30,8 +30,9 @@ public class Spells : MonoBehaviour
     private GameObject target;
 
     void Start()
-    { rig = FindObjectOfType<VRGestureRig>();
+    {
         rig = FindObjectOfType<VRGestureRig>();
+   
         if (rig == null)
         {
             Debug.Log("there is no VRGestureRig in the scene, please add one");
@@ -82,37 +83,37 @@ public class Spells : MonoBehaviour
     void Update()
     {
         //For testing without VR
-       /* if (Input.GetKeyDown(KeyCode.A))
-            DoFire();
+        /* if (Input.GetKeyDown(KeyCode.A))
+             DoFire();
 
-        if (Input.GetKeyDown(KeyCode.Z))
-        {
-            if (!shieldSpellLaunched)
-                DoShield();
-        }
+         if (Input.GetKeyDown(KeyCode.Z))
+         {
+             if (!shieldSpellLaunched)
+                 DoShield();
+         }
 
-        if (Input.GetKeyDown(KeyCode.E))
-        {
-            if (!areaSpellLaunched)
-                DoAreaSpell();
-        }
-        if (Input.GetKeyDown(KeyCode.R))
-        {
-            if (!thunderBoltLaunched)
-                DoThunderBolt();
-        }*/
+         if (Input.GetKeyDown(KeyCode.E))
+         {
+             if (!areaSpellLaunched)
+                 DoAreaSpell();
+         }
+         if (Input.GetKeyDown(KeyCode.R))
+         {
+             if (!thunderBoltLaunched)
+                 DoThunderBolt();
+         }*/
     }
 
     void DoFire()
     {
-        GameObject fireInstance = GameObject.Instantiate(fire, playerHandR.position  + (playerHandR.transform.forward * 1.1f), playerHandR.rotation);
+        GameObject fireInstance = GameObject.Instantiate(fire, playerHandR.position + (playerHandR.transform.forward * 1.1f), playerHandR.rotation);
     }
 
     void DoShield()
     {
         shieldSpellLaunched = true;
         GameObject shieldInstance = GameObject.Instantiate(shield, playerHandR.transform);
-        shieldInstance.transform.localPosition = new Vector3(0, 0, 0.5f);        
+        shieldInstance.transform.localPosition = new Vector3(0, 0, 0.5f);
         //shieldInstance.transform.parent = null;
     }
 

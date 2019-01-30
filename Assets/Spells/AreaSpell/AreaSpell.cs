@@ -35,13 +35,13 @@ public class AreaSpell : MonoBehaviour
 
         if (!validated)
         {
-            gameObject.transform.position = new Vector3(gameObject.transform.position.x, -2.50f, gameObject.transform.position.z);
-            gameObject.transform.rotation = Quaternion.Euler(Vector3.zero);
+            gameObject.transform.position = new Vector3(gameObject.transform.position.x, -1.63f, gameObject.transform.position.z);
+            gameObject.transform.rotation = Quaternion.Euler(Vector3.zero);         
 
-            if (playerHandR.gameObject.transform.localRotation.x > 0.20f)
+            if (playerHandR.gameObject.transform.localRotation.x < -0.2f)
                 gameObject.transform.position += new Vector3(speed, 0, 0);
 
-            else if (playerHandR.transform.localRotation.x < -0.20f)
+            else if (playerHandR.transform.localRotation.x > 0.2f)
             {
                 gameObject.transform.position -= new Vector3(speed, 0, 0);
             }

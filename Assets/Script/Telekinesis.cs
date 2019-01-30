@@ -84,17 +84,14 @@ public class Telekinesis : MonoBehaviour
             lastRotation = currentRotation;
             currentRotation = grabbedObject.transform.rotation;
 
-            if (playerHandL.gameObject.transform.localRotation.x > 0.30f)
-                grabbedObject.transform.position += new Vector3(speed, 0, 0);
+            Debug.Log(playerHandL.gameObject.transform.localPosition);
 
-            else if (playerHandL.transform.localRotation.x < -0.30f)
-            {
+            if (playerHandL.gameObject.transform.localPosition.z <= 0.9f)
                 grabbedObject.transform.position -= new Vector3(speed, 0, 0);
-            }
 
-            else if (playerHandL.transform.localRotation.x == 0)
+            else if (playerHandL.transform.localPosition.z >= 1.2f)
             {
-                grabbedObject.transform.position = Vector3.MoveTowards(grabbedObject.transform.position, playerHandL.transform.position + (playerHandL.transform.forward * 3), 2 * Time.deltaTime);
+                grabbedObject.transform.position += new Vector3(speed, 0, 0);
             }
         }
     }
@@ -104,7 +101,7 @@ public class Telekinesis : MonoBehaviour
         telekinesisOn = true;
         RaycastHit hit;
         Vector3 fwd = playerHandL.transform.TransformDirection(Vector3.forward);
-        Vector3 begin = playerHandL.transform.position + playerHandL.transform.forward * 0.9f;
+        Vector3 begin = playerHandL.transform.position + playerHandL.transform.forward * 0.4f;
 
         if (Physics.Raycast(begin, fwd, out hit, 30))
         {
