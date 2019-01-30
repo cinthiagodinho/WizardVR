@@ -4,9 +4,7 @@ using UnityEngine;
 
 public class Move : MonoBehaviour
 {
-    private Transform player;
-
-
+    public Transform player;
     public Transform startMarker;
     public Transform endMarker;
     public float speed;
@@ -17,8 +15,7 @@ public class Move : MonoBehaviour
     private float fracJourney;
 
     void Start()
-    {
-        player = GameObject.FindGameObjectWithTag("Player").transform;
+    {      
         journeyLength = Vector3.Distance(startMarker.position, endMarker.position);
     }
 
