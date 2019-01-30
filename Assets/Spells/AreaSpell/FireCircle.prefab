@@ -1549,6 +1549,7 @@ MonoBehaviour:
   buttonName: RHandTrigger
   timeTillDeath: 7.5
   speed: 0.08
+  debug: {fileID: 0}
 --- !u!114 &114234441901964846
 MonoBehaviour:
   m_ObjectHideFlags: 1

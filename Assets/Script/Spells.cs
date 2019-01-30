@@ -65,16 +65,30 @@ public class Spells : MonoBehaviour
         switch (gestureName)
         {
             case "FireBall":
-                DoFire();
+                if (!fireBallLaunched)
+                {
+                    if (Cooldown.fireBall == 0)
+                        DoFire();
+                }
                 break;
+
             case "FireCircle":
                 if (!areaSpellLaunched)
-                    DoAreaSpell();
+                {
+                    if (Cooldown.zoneAttack == 0)
+                        DoAreaSpell();
+                }
                 break;
+
             case "Shield":
                 if (!shieldSpellLaunched)
-                    DoShield();
+                {
+                    if (Cooldown.shield == 0)
+                        DoShield();
+                }
+
                 break;
+
             case "ThunderBolt":
                 if (!thunderBoltLaunched)
                     DoThunderBolt();
@@ -112,14 +126,16 @@ public class Spells : MonoBehaviour
             DoFire();
 
         if (fireBallCount == 4 && !fireBallLaunched)
+        {
             fireBallCount = 1;
+            Cooldown.fireBall = 1;
+        }
     }
 
     void DoFire()
     {
         fireBallLaunched = true;
         fireInstance = GameObject.Instantiate(fire, playerHandR.position + (playerHandR.transform.forward * 1.1f), playerHandR.rotation);
-        Debug.Log(fireBallCount);
     }
 
     void DoShield()

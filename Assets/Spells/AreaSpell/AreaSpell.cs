@@ -4,6 +4,7 @@ using UnityEngine;
 using Edwon.VR;
 using Edwon.VR.Gesture;
 using Edwon.VR.Input;
+using UnityEngine.UI;
 
 public class AreaSpell : MonoBehaviour
 {
@@ -16,6 +17,8 @@ public class AreaSpell : MonoBehaviour
 
     VRGestureRig rig;
     Transform playerHandR;
+
+   // public Text debug;
 
     void Start()
     {
@@ -36,14 +39,16 @@ public class AreaSpell : MonoBehaviour
         if (!validated)
         {
             gameObject.transform.position = new Vector3(gameObject.transform.position.x, -1.63f, gameObject.transform.position.z);
-            gameObject.transform.rotation = Quaternion.Euler(Vector3.zero);         
+            gameObject.transform.rotation = Quaternion.Euler(Vector3.zero);
+
+            //debug.text = playerHandR.gameObject.transform.localRotation.ToString();
 
             if (playerHandR.gameObject.transform.localRotation.x < -0.2f)
-                gameObject.transform.position += new Vector3(speed, 0, 0);
+                gameObject.transform.position -= new Vector3(speed, 0, 0);
 
             else if (playerHandR.transform.localRotation.x > 0.2f)
             {
-                gameObject.transform.position -= new Vector3(speed, 0, 0);
+                gameObject.transform.position += new Vector3(speed, 0, 0);
             }
         }
     }
@@ -65,6 +70,7 @@ public class AreaSpell : MonoBehaviour
         //gameObject.transform.GetChild(0).gameObject.SetActive(true);
         yield return new WaitForSeconds(timeTillDeath);
         Spells.areaSpellLaunched = false;
+        Cooldown.zoneAttack = 1;
         Destroy(gameObject);
     }
 }
