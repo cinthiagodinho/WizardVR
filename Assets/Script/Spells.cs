@@ -65,7 +65,7 @@ public class Spells : MonoBehaviour
         switch (gestureName)
         {
             case "FireBall":
-                if (!fireBallLaunched)
+                if (!areaSpellLaunched && !fireBallLaunched && !shieldSpellLaunched)
                 {
                     if (Cooldown.fireBall == 0)
                         DoFire();
@@ -73,7 +73,7 @@ public class Spells : MonoBehaviour
                 break;
 
             case "FireCircle":
-                if (!areaSpellLaunched)
+                if (!areaSpellLaunched && !fireBallLaunched && !shieldSpellLaunched)
                 {
                     if (Cooldown.zoneAttack == 0)
                         DoAreaSpell();
@@ -81,7 +81,7 @@ public class Spells : MonoBehaviour
                 break;
 
             case "Shield":
-                if (!shieldSpellLaunched)
+                if (!areaSpellLaunched && !fireBallLaunched && !shieldSpellLaunched)
                 {
                     if (Cooldown.shield == 0)
                         DoShield();

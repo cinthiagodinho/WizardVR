@@ -18,7 +18,7 @@ public class AreaSpell : MonoBehaviour
     VRGestureRig rig;
     Transform playerHandR;
 
-   // public Text debug;
+    // public Text debug;
 
     void Start()
     {
@@ -34,6 +34,7 @@ public class AreaSpell : MonoBehaviour
         {
             StartCoroutine(DestroySelf());
             gameObject.transform.parent = null;
+            Spells.areaSpellLaunched = false;
         }
 
         if (!validated)
@@ -69,7 +70,6 @@ public class AreaSpell : MonoBehaviour
     {
         //gameObject.transform.GetChild(0).gameObject.SetActive(true);
         yield return new WaitForSeconds(timeTillDeath);
-        Spells.areaSpellLaunched = false;
         Cooldown.zoneAttack = 1;
         Destroy(gameObject);
     }
