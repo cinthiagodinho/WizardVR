@@ -27,7 +27,7 @@ public class Shoot : MonoBehaviour
 
     void Update()
     {
-        if (GetComponentInChildren<Target>().getHealth() == 0)
+        if (GetComponentInChildren<Target>().getHealth() <= 0)
             Destroy(gameObject);
     }
 }

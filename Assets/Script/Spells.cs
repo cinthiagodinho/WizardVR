@@ -30,7 +30,7 @@ public class Spells : MonoBehaviour
     Transform playerHandR;
 
     private GameObject target;
-    
+
     void Start()
     {
         rig = FindObjectOfType<VRGestureRig>();
@@ -61,38 +61,41 @@ public class Spells : MonoBehaviour
     {
         string confidenceString = confidence.ToString().Substring(0, 4);
         //Debug.Log("detected gesture: " + gestureName + " with confidence: " + confidenceString);
-
-        switch (gestureName)
+        if (Game.authorizeSpell)
         {
-            case "FireBall":
-                if (!areaSpellLaunched && !fireBallLaunched && !shieldSpellLaunched)
-                {
-                    if (Cooldown.fireBall == 0)
-                        DoFire();
-                }
-                break;
+            switch (gestureName)
+            {
+                case "FireBall":
+                //Debug.Log("fire detected");
+                    if (!areaSpellLaunched && !fireBallLaunched && !shieldSpellLaunched)
+                    {
+                        if (Cooldown.fireBall == 0)
+                            DoFire();
+                    }
+                    break;
 
-            case "FireCircle":
-                if (!areaSpellLaunched && !fireBallLaunched && !shieldSpellLaunched)
-                {
-                    if (Cooldown.zoneAttack == 0)
-                        DoAreaSpell();
-                }
-                break;
+                case "FireCircle":
+                    if (!areaSpellLaunched && !fireBallLaunched && !shieldSpellLaunched)
+                    {
+                        if (Cooldown.zoneAttack == 0)
+                            DoAreaSpell();
+                    }
+                    break;
 
-            case "Shield":
-                if (!areaSpellLaunched && !fireBallLaunched && !shieldSpellLaunched)
-                {
-                    if (Cooldown.shield == 0)
-                        DoShield();
-                }
+                case "Shield":
+                    if (!areaSpellLaunched && !fireBallLaunched && !shieldSpellLaunched)
+                    {
+                        if (Cooldown.shield == 0)
+                            DoShield();
+                    }
 
-                break;
+                    break;
 
-            case "ThunderBolt":
-                if (!thunderBoltLaunched)
-                    DoThunderBolt();
-                break;
+                case "ThunderBolt":
+                    if (!thunderBoltLaunched)
+                        DoThunderBolt();
+                    break;
+            }
         }
     }
 

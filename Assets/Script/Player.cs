@@ -27,7 +27,7 @@ public class Player : MonoBehaviour
         if (collision.gameObject.GetComponent<FirePower>())
         {
             lifePoints -= damages;
-            Debug.Log("Life points : " + lifePoints);
+//            Debug.Log("Life points : " + lifePoints);
 
             if (lifePoints <= (_lifePoints - stepLife))
                 redView[0].gameObject.SetActive(true);
