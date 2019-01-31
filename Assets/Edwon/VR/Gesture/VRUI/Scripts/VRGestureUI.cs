@@ -113,7 +113,7 @@ namespace Edwon.VR.Gesture
 
             panelManager.FocusPanel("Select Neural Net Menu");
 
-            BeginDetectMode(); //to begin in detect mode
+           // BeginDetectMode(); //to begin in detect mode
         }
 
         void Update()
