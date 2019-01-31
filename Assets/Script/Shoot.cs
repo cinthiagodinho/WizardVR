@@ -21,8 +21,9 @@ public class Shoot : MonoBehaviour
         Quaternion rotation = Quaternion.LookRotation(gameObject.transform.forward, Vector3.up);
         // tir toujours parallèle au sol
         //Quaternion rotation = Quaternion.LookRotation(oppForwardOnFloor, Vector3.up);
-        Vector3 vect = baguette.transform.position + baguette.transform.forward * 0.5f;
+        Vector3 vect = baguette.transform.position + baguette.transform.forward * 0.8f;
         GameObject fireInstance = GameObject.Instantiate(fire, vect, rotation) as GameObject;
+        fireInstance.GetComponent<FireBallSpell>().setFromTarget(true);
     }
 
     void Update()

@@ -72,28 +72,30 @@ public class Telekinesis : MonoBehaviour
                   lineRenderer.SetPosition(1, hit.point);
               }
           }*/
-
-        if (!telekinesisOn && Input.GetAxis(buttonName) == 1)
-            GrabObject();
-
-        else if (telekinesisOn && Input.GetAxis(buttonName) < 1)
+        if (Game.authorizeSpell)
         {
-            DropObject();
-        }
+            if (!telekinesisOn && Input.GetAxis(buttonName) == 1)
+                GrabObject();
 
-        else if (telekinesisOn && grabbedObject != null)
-        {
-            controllerVelocity = OVRInput.GetLocalControllerVelocity(controller);
-            lastRotation = currentRotation;
-            currentRotation = grabbedObject.transform.rotation;
+            else if (telekinesisOn && Input.GetAxis(buttonName) < 1)
+            {
+                DropObject();
+            }
 
-            /*  if (playerHandL.gameObject.transform.localPosition.z <= 0.9f)
-                  grabbedObject.transform.position -= new Vector3(speed, 0, 0);
+            else if (telekinesisOn && grabbedObject != null)
+            {
+                controllerVelocity = OVRInput.GetLocalControllerVelocity(controller);
+                lastRotation = currentRotation;
+                currentRotation = grabbedObject.transform.rotation;
 
-              else if (playerHandL.transform.localPosition.z >= 1.2f)
-              {
-                  grabbedObject.transform.position += new Vector3(speed, 0, 0);
-              }*/
+                /*  if (playerHandL.gameObject.transform.localPosition.z <= 0.9f)
+                      grabbedObject.transform.position -= new Vector3(speed, 0, 0);
+
+                  else if (playerHandL.transform.localPosition.z >= 1.2f)
+                  {
+                      grabbedObject.transform.position += new Vector3(speed, 0, 0);
+                  }*/
+            }
         }
     }
 
@@ -102,7 +104,7 @@ public class Telekinesis : MonoBehaviour
         telekinesisOn = true;
         RaycastHit hit;
         Vector3 fwd = playerHandL.transform.TransformDirection(Vector3.forward);
-        Vector3 begin = playerHandL.transform.position + playerHandL.transform.forward * 0.4f;
+        Vector3 begin = playerHandL.transform.position + playerHandL.transform.forward * 0.3f;
 
         if (Physics.Raycast(begin, fwd, out hit, 30))
         {

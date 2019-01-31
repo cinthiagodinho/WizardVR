@@ -12,7 +12,7 @@ public class Player : MonoBehaviour
     private Rigidbody rb;
     private float speed = 2.0f;
     public Image[] redView;
- 
+    protected int isTouched = 0;
 
 
     void Start()
@@ -21,13 +21,45 @@ public class Player : MonoBehaviour
         stepLife = lifePoints / 4;
         _lifePoints = lifePoints;
     }
-
-    void OnCollisionEnter(Collision collision)
+    public void setIsTouched(int value)
     {
-        if (collision.gameObject.GetComponent<FirePower>())
+        isTouched = value;
+    }
+    /*   void OnCollisionEnter(Collision collision)
+      {
+
+          if (collision.gameObject.GetComponentInParent<FireBallSpell>())
+          {
+              lifePoints -= damages;
+              //            Debug.Log("Life points : " + lifePoints);
+
+              if (lifePoints <= (_lifePoints - stepLife))
+                  redView[0].gameObject.SetActive(true);
+
+              if (lifePoints <= (_lifePoints - stepLife * 2))
+              {
+                  redView[0].gameObject.SetActive(false);
+                  redView[1].gameObject.SetActive(true);
+              }
+
+              if (lifePoints <= (_lifePoints - stepLife * 3))
+              {
+                  redView[1].gameObject.SetActive(false);
+                  redView[2].gameObject.SetActive(true);
+              }
+              if (lifePoints <= (_lifePoints - stepLife * 4))
+              {
+                  redView[2].gameObject.SetActive(false);
+                  redView[3].gameObject.SetActive(true);
+              }
+          }
+      }*/
+
+    void Update()
+    {
+        if (isTouched != 0)
         {
             lifePoints -= damages;
-//            Debug.Log("Life points : " + lifePoints);
 
             if (lifePoints <= (_lifePoints - stepLife))
                 redView[0].gameObject.SetActive(true);
@@ -48,6 +80,9 @@ public class Player : MonoBehaviour
                 redView[2].gameObject.SetActive(false);
                 redView[3].gameObject.SetActive(true);
             }
+
+            isTouched = 0;
         }
-    }   
+    }
 }
+

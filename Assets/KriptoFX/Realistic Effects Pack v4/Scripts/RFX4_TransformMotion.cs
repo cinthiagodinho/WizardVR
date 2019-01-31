@@ -129,6 +129,8 @@ public class RFX4_TransformMotion : MonoBehaviour
             handler(this, new RFX4_CollisionInfo { Hit = hit });
         CollidedInstances.Clear();
 
+        //my code
+       
         if (hit.transform.tag == "Enemy")
         {
             if (hit.transform.gameObject.GetComponentInParent<Opponent>())
@@ -137,6 +139,8 @@ public class RFX4_TransformMotion : MonoBehaviour
             if (hit.transform.gameObject.GetComponentInChildren<Target>()){
                 hit.transform.gameObject.GetComponentInChildren<Target>().setIsTouched(1);              
             }
+        } else if(hit.transform.gameObject.GetComponent<Player>()){
+            hit.transform.gameObject.GetComponent<Player>().setIsTouched(1);
         }
 
         foreach (var effect in EffectsOnCollision)
