@@ -135,8 +135,7 @@ public class RFX4_TransformMotion : MonoBehaviour
                 hit.transform.gameObject.GetComponentInParent<Opponent>().setIsTouched(1);
 
             if (hit.transform.gameObject.GetComponentInChildren<Target>()){
-                hit.transform.gameObject.GetComponentInChildren<Target>().setIsTouched(1);
-                Debug.Log("bordel");
+                hit.transform.gameObject.GetComponentInChildren<Target>().setIsTouched(1);              
             }
         }
 

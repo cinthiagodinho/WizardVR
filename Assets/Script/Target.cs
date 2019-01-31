@@ -39,11 +39,13 @@ public class Target : MonoBehaviour
                 limit = gameController.GetComponent<SpellsData>().getAreaSpellLimit();
                 StartCoroutine(HurtAreaSpell(damages, duration, intervalle, limit));
             }
-
             isTouched = 0;
         }
         if (health <= 0)
-            Destroy(gameObject);        
+        {
+            Destroy(gameObject);
+            Game.enemiesDefeated++;
+        }
     }
     IEnumerator HurtFire(int damage, float duration, float intervalle)
     {
@@ -96,7 +98,8 @@ public class Target : MonoBehaviour
         isTouched = value;
     }
 
-    public int getHealth(){
+    public int getHealth()
+    {
         return health;
     }
 }

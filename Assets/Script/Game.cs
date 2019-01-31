@@ -5,19 +5,23 @@ using UnityEngine.SceneManagement;
 
 public class Game : MonoBehaviour
 {
-
     public GameObject player;
-    private bool gameOver = false;
-    public GameObject canvas;
+    private bool gameOver;
+    private bool win;
+    public GameObject winText;
+    public GameObject gameOverText;
     public GameObject playButton;
-	private bool allowButtonA = false;
+    private bool allowButtonA = false;
+    public int enemiesToDefeat;
+    public static int enemiesDefeated;
 
-    void Start()
+
+    void Awake()
     {
-
+        win = false;
+        gameOver = false;
+        enemiesDefeated = 0;
     }
-
-
     void Update()
     {
         if (player.GetComponent<Player>().lifePoints <= 0)
@@ -29,22 +33,32 @@ public class Game : MonoBehaviour
             gameOver = true;
         }
 
+        if (enemiesDefeated == enemiesToDefeat)
+            win = true;
+
         if (gameOver)
         {
-            canvas.SetActive(true);
+            gameOverText.SetActive(true);
+            InvokeRepeating("DisplayObject", 2, 0);
+        }
+        if (win)
+        {
+            winText.SetActive(true);
             InvokeRepeating("DisplayObject", 2, 0);
         }
 
-		if(OVRInput.GetDown(OVRInput.Button.One)){
-			if(allowButtonA){
-				SceneManager.LoadScene("testenviromagie");
-			}
-		}
+        if (OVRInput.GetDown(OVRInput.Button.One))
+        {
+            if (allowButtonA)
+            {
+                SceneManager.LoadScene("testenviromagie");
+            }
+        }
     }
 
     void DisplayObject()
     {
         playButton.SetActive(true);
-		allowButtonA = true;
+        allowButtonA = true;
     }
 }

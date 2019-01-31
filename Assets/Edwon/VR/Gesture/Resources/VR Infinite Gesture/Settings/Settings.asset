@@ -17,7 +17,7 @@ MonoBehaviour:
   gestureButton: 5
   confidenceThreshold: 0.9549999833106995
   gestureSyncDelay: 500
-  minimumGestureAxisLength: 0.2
+  minimumGestureAxisLength: 0.1
   beginInDetectMode: 0
   vrGestureDetectType: 0
   currentNeuralNet: Neural Net 1
