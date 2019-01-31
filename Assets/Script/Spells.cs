@@ -66,25 +66,32 @@ public class Spells : MonoBehaviour
             switch (gestureName)
             {
                 case "FireBall":
-                //Debug.Log("fire detected");
+                 
                     if (!areaSpellLaunched && !fireBallLaunched && !shieldSpellLaunched)
                     {
+                       
                         if (Cooldown.fireBall == 0)
                             DoFire();
                     }
                     break;
 
                 case "FireCircle":
+                   
+
                     if (!areaSpellLaunched && !fireBallLaunched && !shieldSpellLaunched)
                     {
+                        
                         if (Cooldown.zoneAttack == 0)
                             DoAreaSpell();
                     }
                     break;
 
                 case "Shield":
+                   
+
                     if (!areaSpellLaunched && !fireBallLaunched && !shieldSpellLaunched)
                     {
+                       
                         if (Cooldown.shield == 0)
                             DoShield();
                     }

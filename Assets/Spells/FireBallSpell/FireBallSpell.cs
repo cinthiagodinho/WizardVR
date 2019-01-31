@@ -15,7 +15,7 @@ public class FireBallSpell : MonoBehaviour
     Transform playerHandR;
     public GameObject ActivatedGameObject;
     private bool validated = false;
-    public bool fromTarget = false;
+    //public bool fromTarget = false;
 
     void Start()
     {
@@ -29,16 +29,13 @@ public class FireBallSpell : MonoBehaviour
         {
             ActivateGO();
             validated = true;
-        }
+        }    
 
-        if (fromTarget)
-            InvokeRepeating("ActivateGO", 0.5f, 0);
-
-        if (!validated && !fromTarget)
+        if (!validated)
         {
             gameObject.transform.position = playerHandR.position + (playerHandR.transform.forward * 1.1f);
             gameObject.transform.rotation = playerHandR.rotation;
-        }
+        }        
     }
 
     void OnEnable()
@@ -51,10 +48,6 @@ public class FireBallSpell : MonoBehaviour
         ActivatedGameObject.SetActive(true);
         core.SetActive(false);
         coreLightning.SetActive(false);
-    }
-
-    public void setFromTarget(bool _fromTarget){
-        fromTarget = _fromTarget;
     }
 }
 

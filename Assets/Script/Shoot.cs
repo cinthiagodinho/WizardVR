@@ -8,6 +8,7 @@ public class Shoot : MonoBehaviour
     public GameObject baguette;
     public float startingTime;
     public float shoot;
+    
 
     void Start()
     {
@@ -23,9 +24,9 @@ public class Shoot : MonoBehaviour
         //Quaternion rotation = Quaternion.LookRotation(oppForwardOnFloor, Vector3.up);
         Vector3 vect = baguette.transform.position + baguette.transform.forward * 0.8f;
         GameObject fireInstance = GameObject.Instantiate(fire, vect, rotation) as GameObject;
-        fireInstance.GetComponent<FireBallSpell>().setFromTarget(true);
+       
     }
-
+   
     void Update()
     {
         if (GetComponentInChildren<Target>().getHealth() <= 0)

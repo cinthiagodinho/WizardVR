@@ -33,6 +33,8 @@ public class RFX4_TransformMotion : MonoBehaviour
     private bool dropFirstFrameForFixUnityBugWithParticles;
     public event EventHandler<RFX4_CollisionInfo> CollisionEnter;
 
+
+
     void Start()
     {
         t = transform;
@@ -129,20 +131,6 @@ public class RFX4_TransformMotion : MonoBehaviour
             handler(this, new RFX4_CollisionInfo { Hit = hit });
         CollidedInstances.Clear();
 
-        //my code
-       
-        if (hit.transform.tag == "Enemy")
-        {
-            if (hit.transform.gameObject.GetComponentInParent<Opponent>())
-                hit.transform.gameObject.GetComponentInParent<Opponent>().setIsTouched(1);
-
-            if (hit.transform.gameObject.GetComponentInChildren<Target>()){
-                hit.transform.gameObject.GetComponentInChildren<Target>().setIsTouched(1);              
-            }
-        } else if(hit.transform.gameObject.GetComponent<Player>()){
-            hit.transform.gameObject.GetComponent<Player>().setIsTouched(1);
-        }
-
         foreach (var effect in EffectsOnCollision)
         {
             var instance = Instantiate(effect, hit.point + hit.normal * CollisionOffset, new Quaternion()) as GameObject;
@@ -153,8 +141,32 @@ public class RFX4_TransformMotion : MonoBehaviour
             }
             instance.transform.LookAt(hit.point + hit.normal + hit.normal * CollisionOffset);
             if (!CollisionEffectInWorldSpace) instance.transform.parent = transform;
-            Spells.fireBallLaunched = false;
-            Spells.fireBallCount++;
+
+            //my code
+            if (GetComponentInParent<FireBallSpell>())
+            {
+                Spells.fireBallLaunched = false;
+                Spells.fireBallCount++;
+
+                if (hit.transform.tag == "Enemy")
+                {
+                    if (hit.transform.gameObject.GetComponentInParent<Opponent>())
+                        hit.transform.gameObject.GetComponentInParent<Opponent>().setIsTouched(1);
+
+                    if (hit.transform.gameObject.GetComponentInChildren<Target>())
+                    {
+                        hit.transform.gameObject.GetComponentInChildren<Target>().setIsTouched(1);
+                    }
+                }
+            }
+            else if (GetComponentInParent<FireBallBlue>())
+            {
+                if (hit.transform.gameObject.GetComponent<Player>())
+                {
+                    hit.transform.gameObject.GetComponent<Player>().setIsTouched(1);
+                }
+            }
+
             Destroy(instance, DestroyTimeDelay);
         }
     }
