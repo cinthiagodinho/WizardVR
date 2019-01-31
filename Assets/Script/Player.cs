@@ -12,8 +12,8 @@ public class Player : MonoBehaviour
     private Rigidbody rb;
     private float speed = 2.0f;
     public Image[] redView;
-    public GameObject text;
-    public GameObject playButton;
+ 
+
 
     void Start()
     {
@@ -49,19 +49,5 @@ public class Player : MonoBehaviour
                 redView[3].gameObject.SetActive(true);
             }
         }
-    }
-
-    void Update()
-    {
-        if (lifePoints <= 0)
-        {           
-            text.SetActive(true);
-            InvokeRepeating("DisplayObject", 2, 0);
-        }
-    }
-
-    void DisplayObject()
-    {
-        playButton.SetActive(true);
-    }
+    }   
 }
