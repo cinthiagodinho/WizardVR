@@ -21,5 +21,10 @@ public class FireBallBlue : MonoBehaviour
         ActivatedGameObject.SetActive(true);
         core.SetActive(false);
         coreLightning.SetActive(false);
+        GetComponent<Collider>().isTrigger = false;
+    }
+    void OnCollisionEnter(Collision col)
+    {
+        Destroy(gameObject);
     }
 }

@@ -50,7 +50,7 @@ public class Cooldown : MonoBehaviour
         fireCooldown = _fireCooldown;
         fireBall = 2;
 
-        while (fireCooldown >= 0)
+        while (fireCooldown > 0)
         {
             //Debug.Log("Fire Cooldown :" + fireCooldown);
             fireCooldown--;

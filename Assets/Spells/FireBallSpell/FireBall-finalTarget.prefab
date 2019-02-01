@@ -186,6 +186,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4197547226844024}
   - component: {fileID: 114499377819787674}
+  - component: {fileID: 135818604396059418}
   m_Layer: 0
   m_Name: FireBall-finalTarget
   m_TagString: Untagged
@@ -1040,6 +1041,18 @@ MonoBehaviour:
     m_RotationOrder: 4
   AproximatedFlyDistance: -1
   SmoothCurves: 1
+--- !u!135 &135818604396059418
+SphereCollider:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1818907518009100}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 0.08
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!198 &198126188016578850
 ParticleSystem:
   m_ObjectHideFlags: 1
